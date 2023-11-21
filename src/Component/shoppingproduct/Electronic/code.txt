@@ -1,0 +1,131 @@
+<form>
+                        <div style={{ display: 'flex' }}>
+                            <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>Mobile Name:</h6>
+                            <input type="text" name="comapny" id="company" className='mx-5' />
+                        </div>
+                        <div className='my-3' style={{ display: 'flex' }}>
+                            <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Company Name:</h6>
+                            <div className='mx-5 productlist' onClick={handleopenlist} > <div className="col">{companyname}</div><div className='col' style={{ display: 'flex', alignItems: 'center', position: 'absolute', left: '4rem', justifyContent: 'center' }}> <ArrowDropDownIcon /></div></div>
+                            <ul id='companylist_1' style={{ listStyle: 'none', width: '8rem', backgroundColor: '#fff', borderRadius: "5px", border: '1px solid #ccc', display: "none", position: 'fixed', right: '37.5rem', top: "15.63rem" }} onMouseLeave={handlelistClose}>
+                                <li>
+                                    <MenuItem onClick={() => handleChange('Apple')} name='Apple' value={'Apple'}>Apple</MenuItem>
+                                </li>
+                                <li>
+                                    <MenuItem onClick={() => handleChange('IQ00')} name='IQ00' value={'IQ00'}>IQ00</MenuItem>
+                                </li>
+                                <li>
+                                    <MenuItem onClick={() => handleChange('Motorola')} name='Motorola' value={'Motorola'}>Motorola</MenuItem>
+                                </li>
+                                <li>
+                                    <MenuItem onClick={() => handleChange('Nothing')} name='Nothing' value={'Nothing'}>Nothing</MenuItem>
+                                </li>
+                                <li>
+                                    <MenuItem onClick={() => handleChange('OnePlus')} name='OnePlus' value={"OnePlus"}>OnePlus</MenuItem>
+                                </li>
+                                <li>
+                                    <MenuItem onClick={() => handleChange('Oppo')} name='Oppo' value={"Oppo"}>Oppo</MenuItem>
+                                </li>
+                                <li>
+                                    <MenuItem onClick={() => handleChange('Realme')} name='Realme' value={"Realme"}>Realme</MenuItem>
+                                </li>
+                                <li>
+                                    <MenuItem onClick={() => handleChange('Redmi')} name='Redmi' value={"Redmi"}>Redmi</MenuItem>
+                                </li>
+                                <li>
+                                    <MenuItem onClick={() => handleChange('Samsung')} name='Samsung' value={"Samsung"}>Samsung</MenuItem>
+                                </li>
+                            </ul>
+                        </div>
+                        <div style={{ display: 'flex' }}>
+                            <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Model Name:</h6>
+                            <input type="text" name="model" id="model" className='mx-5' style={{ position: 'relative', left: '4px' }} />
+                        </div>
+                        <div className='my-3' style={{ display: 'flex' }}>
+                            <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Mobile Image:</h6>
+                            <input type="file" name="mobileimage" id="mobileimage" style={{ position: "relative", left: '47px' }} />
+                        </div>
+                        <div className='my-3' style={{ display: 'flex' }}>
+                            <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>RAM:</h6>
+                            <div>
+                                <FormControl style={{width:'24rem',position:"relative",left:"100px"}}>
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                        name="row-radio-buttons-group"
+                                    >
+                                        <FormControlLabel value="2GB" control={<Radio />} label="2GB & below" />
+                                        <FormControlLabel value="3GB" control={<Radio />} label="3GB" />
+                                        <FormControlLabel value="4GB" style={{position:'relative',left:'30px'}} control={<Radio /> } label="4GB Star" />
+                                        <FormControlLabel value="8GB" control={<Radio />} label="8GB" />
+                                        <FormControlLabel value="12GB" style={{position:'relative', left:"62px"}} control={<Radio />} label="12GB &Above" />
+
+                                    </RadioGroup>
+                                </FormControl>
+                            </div>
+                        </div>
+                        <div className='my-3' style={{ display: 'flex' }}>
+                            <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>Internal Storage:</h6>
+                            <div>
+                                <FormControl style={{width:'24rem',position:"relative",left:"34px"}}>
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                        name="row-radio-buttons-group"
+                                    >
+                                        <FormControlLabel value="256GB" control={<Radio />} label="256GB & Above" />
+                                        <FormControlLabel value="128GB" style={{position:'relative',left:"26px"}} control={<Radio />} label="128GB & Above" />
+                                        <FormControlLabel value="64GB" control={<Radio />} label="64GB & Above Star" />
+                                        <FormControlLabel value="32GB" control={<Radio />} label="32GB" />
+                                        <FormControlLabel value="16GB" control={<Radio />} label="16GB &Above" />
+                                        <FormControlLabel value="8GB" style={{position:'relative',left:"39px"}} control={<Radio />} label="8GB &Above" />
+                                        <FormControlLabel value="4GB" control={<Radio />} label="4GB &Above" />
+                                        <FormControlLabel value="2GB" style={{position:'relative',left:'48px'}} control={<Radio />} label="2GB &Above" />
+
+                                    </RadioGroup>
+                                </FormControl>
+                            </div>
+                        </div>
+                        <div className='my-3' style={{ display: 'flex' }}>
+                            <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>RAM:</h6>
+                            <div>
+                                <FormControl style={{width:'24rem',position:"relative",left:"100px"}}>
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                        name="row-radio-buttons-group"
+                                    >
+                                        <FormControlLabel value="5inch" control={<Radio />} label="2GB & below" />
+                                        <FormControlLabel value="3GB" control={<Radio />} label="3GB" />
+                                        <FormControlLabel value="4GB" style={{position:'relative',left:'30px'}} control={<Radio /> } label="4GB Star" />
+                                        <FormControlLabel value="8GB" control={<Radio />} label="8GB" />
+                                        <FormControlLabel value="12GB" style={{position:'relative', left:"62px"}} control={<Radio />} label="12GB &Above" />
+
+                                    </RadioGroup>
+                                </FormControl>
+                            </div>
+                        </div>
+                        <div className='my-3' style={{ display: 'flex' }}>
+                            <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>Rating :</h6>
+                            <div>
+                                <FormControl style={{width:'24rem',position:"relative",left:"86px"}}>
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                        name="row-radio-buttons-group"
+                                    >
+                                        <FormControlLabel value="1 Star" control={<Radio />} label="1 Star" />
+                                        <FormControlLabel value="1.5 Star" style={{position:'relative',left:"14px"}} control={<Radio />} label="1.5 Star" />
+                                        <FormControlLabel value="2 Star" style={{position:'relative',left:"30px"}} control={<Radio />} label="2 Star" />
+                                        <FormControlLabel value="2.5 Star" control={<Radio />} label="2.5 Star" />
+                                        <FormControlLabel value="3 Star" control={<Radio />} label="3 Star" />
+                                        <FormControlLabel value="3.5 Star" style={{position:'relative',left:"30px"}} control={<Radio />} label="3.5 Star" />
+                                        <FormControlLabel value="4 Star" control={<Radio />} label="4 Star" />
+                                        <FormControlLabel value="4.5 Star" style={{position:'relative',left:"14px"}} control={<Radio />} label="4.5 Star" />
+                                        <FormControlLabel value="5 Star" style={{position:'relative',left:"30px"}} control={<Radio />} label="5 Star" />
+
+                                    </RadioGroup>
+                                </FormControl>
+                            </div>
+                        </div>
+                        <button className="btn btn-primary" onClick={handleCardclose}>Close</button>
+                    </form>

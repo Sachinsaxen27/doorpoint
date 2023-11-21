@@ -1,0 +1,32 @@
+const database=require('./database')
+database()
+
+const express=require('express')
+const cors=require('cors')
+
+const app=express()
+const port=5000
+app.use(cors(({ origin: 'http://localhost:3000', credentials: true })))
+app.use(express.json({limit:"10mb",extended:true}))
+app.use(express.urlencoded({limit:"10mb",extended:true,parameterLimit:50000}))
+
+app.use('/api/userlogin',require('./data/Userlogin'))
+app.use('/api/productadd',require('./data/ProductEntry'))
+app.use('/api/fashionadd',require('./data/FashionData'))
+app.use('/api/toysadd',require('./data/Toys&BeautyData'))
+app.use('/api/cameraadd',require('./data/CameraData'))
+app.use('/api/printeradd',require('./data/CameraData'))
+app.use('/api/headphonesadd',require('./data/CameraData'))
+app.use('/api/trimmeradd',require('./data/CameraData'))
+app.use('/api/watchesadd',require('./data/CameraData'))
+app.use('/api/footwearadd',require('./data/FashionData'))
+app.use('/api/groomingadd',require('./data/FashionData'))
+app.use('/api/watcheadd',require('./data/FashionData'))
+app.use('/api/accessoriesadd',require('./data/FashionData'))
+app.use('/api/booksadd',require('./data/Toys&BeautyData'))
+app.use('/api/televisionadd',require('./data/AppliancesData'))
+app.use('/api/machineadd',require('./data/AppliancesData'))
+app.use('/api/refriadd',require('./data/AppliancesData'))
+app.listen(port,()=>{
+    console.log(`DoorPoint App is listening at http://localhost:${port}`)
+})

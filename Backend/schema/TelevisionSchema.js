@@ -1,0 +1,83 @@
+const mongoose = require('mongoose')
+
+const { Schema } = mongoose
+
+const TelevisionSchema = new Schema({
+    applianceid:{
+        type:Number,
+        required:true
+    },
+    name:{
+        type:String,
+        required:true
+    },
+    appliancetype:{
+        type:String,
+        required:true
+    },
+    appliancecate:{
+        type:String,
+        required:true
+    },
+    company:{
+        type:String
+    },
+    screensize:{
+        type:Number
+    },
+    resolution:{
+        type:String
+    },
+    smartTV:{
+        type:String
+    },
+    panelType:{
+        type:String
+    },
+    supportapp:{
+        type:String
+    },
+    nospeaker:{
+        type:Number
+    },
+    speakerType:{
+        type:String
+    },
+    soundTechnology:{
+        type:String
+    },
+    ram:{
+        type:Number
+    },
+    internal:{
+        type:Number
+    },
+    bluetooth:{
+        typee:String
+    },
+    hdmi:{
+        type:Number
+    },
+    usb:{
+        type:Number
+    },
+    dimension:{
+        type:String
+    },
+    wieght:{
+        type:Number
+    },
+    details:{
+        type:String
+    },
+    price:{
+        type:Number
+    },
+    image:{
+        type:String
+    },
+    power:{
+        type:String
+    }
+})
+module.exports = mongoose.model('televisionadd', TelevisionSchema)

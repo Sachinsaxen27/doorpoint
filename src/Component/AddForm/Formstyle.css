@@ -1,0 +1,15 @@
+
+.categorylist_1 {
+    list-style: none;
+    width: 11rem;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: none;
+    position: absolute;
+    right: 26.7rem;
+    top: 16.8rem;
+    z-index: 10000;
+    height: 10rem;
+    overflow-y: scroll
+}

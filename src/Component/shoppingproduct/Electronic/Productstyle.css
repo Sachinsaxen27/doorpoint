@@ -1,0 +1,45 @@
+.column:hover{
+    /* background-color:rgba(221, 221, 221, 0.2);  */
+    border:1px solid black;
+
+}
+.column{
+    display: grid;
+    height: 150px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #fb7c14;
+    /* background-color: #E2C0E9; */
+}
+.menus{
+    /* background-color: rgb(4, 4, 125); */
+    background-color: #fff;
+    
+}
+.para{
+    position: absolute;
+    top: 80px;
+    left: 48px;
+}
+.column_1{
+    border:1px outset;
+    background-color: white;
+    height: 8rem;
+    width: 7rem;
+}
+.column_1:hover{
+    border: 1px solid black;
+}
+.span_1{
+    position: absolute;
+    top: 9.5rem;
+    left: 2.8rem;
+}
+/* CAMERA FILE CSS */
+.categoryitem{
+    display:grid;
+    justify-content: center;
+    text-align: center;
+    cursor:pointer;
+}
