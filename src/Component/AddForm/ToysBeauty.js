@@ -19,6 +19,9 @@ function ToysBeauty() {
         if (companylist.style.display === 'none') {
             companylist.style.display = 'block'
         }
+        else{
+            companylist.style.display='none'
+        }
     }
     const handleClosetoysbeautylist = (elementId) => {
         let companylist = document.getElementById(elementId)
@@ -106,6 +109,7 @@ function ToysBeauty() {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
     const handleReset = () => {
+        setMyBooksdeatials({ publishdate: "", publisher: "", binding: "", nopage: "", languages: "", edition: "", author: "",availablelanguages:"" })
         setmytoysdetails({ itemid: "", name: "", age: "", brand: "", material: "", color: "", price: "", recommandplayer: "", information: "", features: "", includeaccess: "", notes: "", rechargeable: "" })
         setMytoysbeauty('None')
         setImage('None')
@@ -158,7 +162,7 @@ function ToysBeauty() {
                                 <div className="d-flex justify-content-between">
                                     <div className='my-3' >
                                         <h6 > Item Id:</h6>
-                                        <input type="number" name="itemid" id="itemid" className='mx-3' onChange={handletoysChange} value={toysdetails.itemid} required style={{ position: 'relative', right: '1rem' }} />
+                                        <input type="text" name="itemid" id="itemid" className='mx-3' onChange={handletoysChange} value={toysdetails.itemid} required style={{ position: 'relative', right: '1rem' }} />
                                     </div>
                                     <div className='my-3' >
                                         <h6 > Name:</h6>
@@ -175,7 +179,7 @@ function ToysBeauty() {
                                             <div className='col' style={{ display: 'flex', alignItems: 'center', position: 'absolute', left: '4rem', justifyContent: 'center' }}> <ArrowDropDownIcon />
                                             </div>
                                         </div>
-                                        <ul id='toysbeautylist_1' style={{ listStyle: 'none', width: '11rem', backgroundColor: '#fff', overflowY: 'hidden', borderRadius: "5px", border: '1px solid #ccc', display: "none", position: 'absolute', right: '29.7rem', top: "17.2rem", zIndex: '10000' }} onMouseLeave={() => { handleClosetoysbeautylist('toysbeautylist_1') }} required >
+                                        <ul id='toysbeautylist_1' style={{ listStyle: 'none', width: '11rem', backgroundColor: '#fff', overflowY: 'hidden', borderRadius: "5px", border: '1px solid #ccc', display: "none", position: 'absolute', right: '29.7rem', top: "15.7rem", zIndex: '10000' }} onMouseLeave={() => { handleClosetoysbeautylist('toysbeautylist_1') }} required >
                                             <li>
                                                 <MenuItem onClick={() => handleproduct('Toys')} name='Toys' value={'Toys'}>Toys</MenuItem>
                                             </li>
@@ -188,7 +192,7 @@ function ToysBeauty() {
                                         <h6>Product Selection:</h6>
                                         <div className='mx-3 productlist' onClick={() => { handleopentoysbeautylist('productlist_1') }} style={{ position: 'relative', right: '1rem', width: '12rem' }} >
                                             <div className="col">
-                                                {toysbeauty}
+                                                {(toysbeauty).slice(0,15)}
                                             </div>
                                             <div className='col' style={{ display: 'flex', alignItems: 'center', position: 'absolute', left: '5rem', justifyContent: 'center' }}> <ArrowDropDownIcon />
                                             </div>
@@ -253,6 +257,12 @@ function ToysBeauty() {
                                                 <MenuItem onClick={() => handletoysbeautylist("Textbooks")} name="Textbooks" value={"Textbooks"}>Textbooks</MenuItem>
                                             </li>
                                         </ul>}
+                                        {Products==='None'&& 
+                                        <ul id='productlist_1' style={{ listStyle: 'none', width: '12rem', backgroundColor: '#fff', borderRadius: "5px", border: '1px solid #ccc', display: "none", position: 'absolute', right: '32px', top: "3.5rem", zIndex: '10000', fontSize: '14px', overflowY: 'hidden' }} onMouseLeave={() => { handleClosetoysbeautylist("productlist_1") }} required >
+                                        <li>
+                                            <MenuItem onClick={() => handletoysbeautylist('Fiction Books')} name='Fiction Books' value={'None'}>None</MenuItem>
+                                        </li>
+                                    </ul>}
                                     </div>
                                 </div>
                             </Typography>

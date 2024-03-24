@@ -15,7 +15,7 @@ router.post('/usersignup', [
         let success = false
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            console.log(errors)
+            //  .log(errors)
             return res.status(400).json({ success, errors: errors.array() });
         }
         try {
@@ -58,7 +58,7 @@ router.post("/ulogin", [
     // Defactoring the password or email from the database as password or email
     const { password, email } = req.body
     let success = false
-    console.log(password, email)
+    // console.log(password, email)
     try {
         // finding the email
         let user = await User.findOne({ email })
@@ -66,7 +66,7 @@ router.post("/ulogin", [
             return res.status(500).json({ success, error: "Incorrect information" })
         }
         // Comparing the given password and database password
-        console.log(user.password)
+        // console.log(user.password)
         const passwordCompare = await bcrypt.compare(password, user.password)
         if (!passwordCompare) {
             return res.status(500).json({ error: "Incorrect information" })
@@ -78,10 +78,10 @@ router.post("/ulogin", [
         }
         const jwt_Sign = "SachinSAXENA"
         const authtoken = jwt.sign(payload, jwt_Sign)
-
         res.json({ success: true, authtoken })
     } catch (error) {
         console.log(error)
+        console.log('enter')
         res.status(500).json(error)
     }
 })
@@ -89,8 +89,9 @@ router.post("/ulogin", [
 router.get('/getuserdata',fetchuser, async (req, res) => {
     try {
         const userId = req.user;
-        console.log(userId)
+        console.log(req.user,'ds')
         const user = await User.findById(userId).select('-password -_id -__v')
+        console.log(user)
         res.json(user)
     } catch (error) {
         res.status(500).send("Some Error Occurred")

@@ -36,7 +36,7 @@ const footwearSchema = new Schema({
         required: true
     },
     image:{
-        type: String,
+        type: Array,
         required: true
     },
     gender:{
@@ -48,6 +48,13 @@ const footwearSchema = new Schema({
         required:true
     },
     footweartype:{
+        type:String,
+        required:true
+    },
+    rating:{
+        type:Number
+    },
+    fieldsection:{
         type:String,
         required:true
     }

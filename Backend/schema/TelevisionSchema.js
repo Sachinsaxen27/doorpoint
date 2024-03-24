@@ -4,7 +4,7 @@ const { Schema } = mongoose
 
 const TelevisionSchema = new Schema({
     applianceid:{
-        type:Number,
+        type:String,
         required:true
     },
     name:{
@@ -23,7 +23,7 @@ const TelevisionSchema = new Schema({
         type:String
     },
     screensize:{
-        type:Number
+        type:String
     },
     resolution:{
         type:String
@@ -74,10 +74,17 @@ const TelevisionSchema = new Schema({
         type:Number
     },
     image:{
-        type:String
+        type:Array
     },
     power:{
         type:String
+    },
+    rating:{
+        type:Number
+    },
+    fieldsection:{
+        type:String,
+        required:true
     }
 })
 module.exports = mongoose.model('televisionadd', TelevisionSchema)

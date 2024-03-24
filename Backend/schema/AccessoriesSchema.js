@@ -28,7 +28,7 @@ const AccessoriesSchema = new Schema({
         required: true
     },
     image: {
-        type: String,
+        type: Array,
         required: true
     },
     gender: {
@@ -62,6 +62,16 @@ const AccessoriesSchema = new Schema({
     },
     gemstone:{
         type:String
+    },
+    bagtype:{
+        type:String
+    },
+    rating:{
+        type:Number
+    },
+    fieldsection:{
+        type:String,
+        required:true
     }
 })
 module.exports = mongoose.model('accessoriesadd', AccessoriesSchema)

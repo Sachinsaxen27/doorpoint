@@ -1,68 +1,89 @@
 .App {
-    font-family: sans-serif;
-    text-align: center;
-  }
-  .slick-track {
-    display: flex;
-  }
-  .slick-slider {
-    display: flex;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .slick-slide {
-    padding-right: 10px;
-  }
-  
-  .slick-slide:last-child {
-    padding-right: 0;
-  }
-  .slick-slide img {
-    display: block;
-  }
-  .slick-list {
-    margin: 0 15px;
-  }
-  
-  .slick-prev {
-    width: 50px;
-    left: 0;
-    top: 20%;
-    position: absolute;
-    height: 50px;
-    background: tomato;
-    z-index: 1;
-    border-radius: 50%;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  }
-  
-  .slick-next {
-    width: 50px;
-    right: 0;
-    top: 20%;
-    position: absolute;
-    height: 50px;
-    background: tomato;
-    z-index: 1;
-    border-radius: 50%;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  }
-  
-  .slick-prev:focus,
-  .slick-prev:hover,
-  .slick-next:hover,
-  .slick-next:focus {
-    color: transparent;
-    outline: none;
-    background: tomato;
-  }
-  .product-actions {
-    display: flex;
-    justify-content: space-between;
-  }
-  /* .hidden {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.slick-track {
+  display: flex;
+}
+
+.slick-slider {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.slick-slide {
+  padding-right: 10px;
+}
+
+.slick-slide:last-child {
+  padding-right: 0;
+}
+
+.navbar1 {
+  background-color: rgb(57 79 107);
+  position: fixed;
+  z-index: 1000000;
+  top: 0px;
+  height: 62px;
+  width: 80rem;
+  left: 0rem;
+}
+
+.navbar_container {
+  position: relative;
+  right: 3rem;
+}
+
+.slick-slide img {
+  display: block;
+}
+
+.slick-list {
+  margin: 0 15px;
+}
+
+.slick-prev {
+  width: 50px;
+  left: 0;
+  top: 20%;
+  position: absolute;
+  height: 50px;
+  background: tomato;
+  z-index: 1;
+  border-radius: 50%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.slick-next {
+  width: 50px;
+  right: 0;
+  top: 20%;
+  position: absolute;
+  height: 50px;
+  background: tomato;
+  z-index: 1;
+  border-radius: 50%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.slick-prev:focus,
+.slick-prev:hover,
+.slick-next:hover,
+.slick-next:focus {
+  color: transparent;
+  outline: none;
+  background: tomato;
+}
+
+.product-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .hidden {
     position: absolute;
     left: -10000px;
     top: auto;
@@ -70,4 +91,167 @@
     height: 100px;
     overflow: hidden;
   } */
-  
+.section {
+  cursor: pointer;
+}
+
+.sectionp-1 {
+  background-color: #ff00004a;
+  height: 6rem;
+  width: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+}
+
+.button-carousel {
+  width: 4rem;
+  height: 2rem;
+  border: none;
+  background-color: transparent;
+  color: black;
+  top: 114px;
+}
+
+.button-carousel:hover {
+  color: black;
+}
+
+.women_nav {
+  margin: 0 auto;
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  width: 48rem;
+  border: 2px solid black;
+  border-style: inset;
+  box-shadow: 0px 0px 5px;
+}
+
+.women_hand {
+  border: 2px solid black;
+  margin-top: 70px;
+  width: 53rem;
+  height: 10.3rem;
+}
+
+.women_groom {
+  border: 2px solid black;
+  margin-top: 70px;
+  width: 53rem;
+  height: 13rem;
+  cursor: pointer;
+  background-color: #ededed;
+  margin-bottom: 3px;
+}
+
+.women_groom_skin {
+  margin-top: 70px;
+  width: 62rem;
+  height: 16 rem;
+  cursor: pointer;
+  margin-bottom: 3px;
+}
+
+.women_groom2 {
+  border: 1px solid lightgray;
+  margin-top: 2px;
+  width: 53rem;
+  height: 32.7rem;
+  cursor: pointer;
+  background-color: #edeede;
+}
+
+.women_hand1 {
+  display: flex;
+  cursor: pointer;
+}
+
+.skin_groom {
+  height: 11rem;
+}
+
+.women_bag1 {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  background-color: white;
+  width: 48.4rem;
+  margin: 0 auto;
+
+}
+
+.women_skin_bag {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  width: 60rem;
+}
+
+.women_nav div {
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.nav_image {
+  height: 8rem;
+}
+
+.women_nav span {
+  margin-left: 24px;
+}
+
+.nav_imag {
+  height: 7rem;
+}
+
+.women_bag1 span {
+  display: flex;
+  width: 75px;
+  text-align: center;
+  justify-content: center;
+}
+
+.women_sec {
+  display: grid;
+  justify-items: center;
+  border: 1px solid black;
+  box-shadow: 0px 0px 2px 1px;
+}
+
+.brand_img {
+  height: 14rem;
+  width: 10rem;
+}
+
+.brand_name {
+  margin: 0 auto;
+  width: 66rem;
+}
+
+.skin_box {
+  font-weight: 500;
+  text-align: center;
+  width: 9rem;
+}
+
+.editfashion {
+  display: block;
+  border: 1px solid;
+  position: fixed;
+  z-index: 100000;
+  background: white;
+  top: 7rem;
+  margin: auto;
+  left: 22rem;
+  width: 40rem;
+  height: 23rem;
+}
+.loadingbar{
+  margin: 0px auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50px, 10px);
+}

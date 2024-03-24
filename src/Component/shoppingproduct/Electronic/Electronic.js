@@ -18,6 +18,7 @@ import { Button, CardActionArea, CardActions, Divider } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareSharpIcon from '@mui/icons-material/ShareSharp';
 import DoorPointApi from '../../../ComponentAPI/DoorPointAPI';
+import Notfound from '../Notfound';
 
 
 function Electronic() {
@@ -200,7 +201,7 @@ function Electronic() {
                 </Button>
               </CardActions>
             </Card>
-          }) : <div><h5>No Data</h5></div>}
+          }) : <Notfound/>}
         </div>
       </div>
     </>

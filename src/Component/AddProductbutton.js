@@ -12,6 +12,7 @@ import AddElectronic from './AddForm/AddElectronic';
 import AddFashion from './AddForm/AddFashion';
 import ToysBeauty from './AddForm/ToysBeauty';
 import Appliances from './AddForm/Appliances';
+import { Cancel } from '@mui/icons-material';
 
 
 const actions = [
@@ -50,11 +51,11 @@ function AddProductbutton() {
             model.style.display = 'block'
             // document.body.style.opacity='0'  
         }
-    }
+    }   
 
     return (
         <>
-            <Box sx={{ height: 330, transform: 'translateZ(0px)', flexGrow: 1 }} style={{ position: 'fixed', bottom: "20px", right: "10px", zIndex: '1000' }}>
+            <Box sx={{ height: 330, transform: 'translateZ(0px)', flexGrow: 1 }} style={{ position: 'fixed', bottom: "20px", right: "10px", zIndex: '1000000000' }}>
                 <Backdrop open={open} />
                 <SpeedDial
                     ariaLabel="SpeedDial tooltip example"
@@ -75,30 +76,20 @@ function AddProductbutton() {
                     ))}
                 </SpeedDial>
             </Box>
-            <div id='card_1' className="card" style={{ width: "42rem", height: '31rem', display: "none", position: 'fixed', top: '6rem', left: '20rem', zIndex: '10000', overflow: 'auto ', overflowX: 'hidden',top:"30px" }}>
-            <CancelIcon onClick={handleCardclose} style={{position:'fixed',left:'59rem',cursor:'pointer',top:"37px"}}/>
+            <div id='card_1' className="card" style={{ width: "42rem", height: '31rem', display: "none", position: 'fixed', left: '20rem', zIndex: '10000', overflow: 'auto ', overflowX: 'hidden',top:"3rem" }}>
                 <div className="card-body">
                     <div className="d-flex text-center">
                         <h6 className="card-title text-center mx-3" onClick={() => handleoptionChange('Mobile')} style={{ cursor: "pointer" }}>Add Electronic</h6>
                         <h6 className="card-title text-center mx-3" onClick={() => handleoptionChange('Clothes')} style={{ cursor: "pointer" }}>Add Clothes</h6>
                         <h6 className="card-title text-center mx-3" onClick={() => handleoptionChange('Toys')} style={{ cursor: "pointer" }}>Add Toys,Books</h6>
                         <h6 className="card-title text-center mx-3" onClick={() => handleoptionChange('Appliances')} style={{ cursor: "pointer" }}>Add Home Appliances</h6>
+                        <Cancel onClick={handleCardclose} style={{cursor:'pointer'}}/>
                     </div>
                     <Divider />
-                    {/* ADD MOBILE AWECODE START */}
                     {option === 'Mobile' && <AddElectronic />}
-                    {/* ADD MOBILE FORM END HERE */}
-                    {/* ADD FASHION CODE START */}
-                    {/* http://localhost:5000/api/fashionadd/getclothes */}
                     {option === 'Clothes' && <AddFashion />}
-                    {/* ADD FASHION FORM END HERE */}
-                    {/* ADD TOYS AND BEAUTY CODE START */}
-                    {/* http://localhost:5000/api/fashionadd/getclothes */}
                     {option === 'Toys' && <ToysBeauty />}
-                    {/* ADD FASHION FORM END HERE */}
                     {option === 'Appliances' && <Appliances />}
-                    {/* ADD APPLIANCES FORM END HERE */}
-
                 </div>
             </div>
 

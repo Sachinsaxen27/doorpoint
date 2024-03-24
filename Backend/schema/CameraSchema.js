@@ -63,10 +63,13 @@ const Cameraschema = new Schema({
     },
     inbox:{
         type:String
+    },
+    rating:{
+        type:Number
+    },
+    fieldsection:{
+        type:String,
+        required:true
     }
-    // rating:{
-    //     type:String,
-    //     required:true
-    // }
 })
 module.exports = mongoose.model('cameraadd', Cameraschema)

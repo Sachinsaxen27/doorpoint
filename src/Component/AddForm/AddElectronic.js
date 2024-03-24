@@ -65,10 +65,10 @@ function AddElectronic() {
         }
     }
     const [details, setmyDetails] = useState({ name: "", mmodel: "", ram: "", internal: "", display: "", camera: "", rating: "", processor: "", battery: "", price: "", information: "" })
-    const [head, setMyhead] = useState({ playtime: "", connectivity: "", pageminutes: "", color: "", paperSize: "", lensmount: "", sensorsize: "", sensortype: "", effectivelens: "", cameracolor: "", operatingsystem: '', graphiccard: '', storagetype: '', hddstorage: "",inbox:"" })
+    const [head, setMyhead] = useState({ playtime: "", connectivity: "", pageminutes: "", color: "", paperSize: "", lensmount: "", sensorsize: "", sensortype: "", effectivelens: "", cameracolor: "", operatingsystem: '', graphiccard: '', storagetype: '', hddstorage: "", inbox: "" })
     const [Trimmers, setMyTrimmer] = useState({ range: "", chargingtime: "", bladetype: "", bodytype: "", sensor: "", shape: "", notification: "" })
     const [waterResistant, setMywaterResistant] = useState('')
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         if (category === 'Mobile') {
             const response = await fetch('http://localhost:5000/api/productadd/mobile', {
@@ -124,7 +124,7 @@ function AddElectronic() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name: details.name, battery: details.battery, display: details.display, company: company, mmodel: details.mmodel, image: image, price: details.price, category: category, information: details.information, lensmount: head.lensmount, sensorsize: head.sensorsize, cameratype: cameratype, cameracolor: head.cameracolor, effectivelens: head.effectivelens, sensortype: head.sensortype,inbox:head.inbox})
+                body: JSON.stringify({ name: details.name, battery: details.battery, display: details.display, company: company, mmodel: details.mmodel, image: image, price: details.price, category: category, information: details.information, lensmount: head.lensmount, sensorsize: head.sensorsize, cameratype: cameratype, cameracolor: head.cameracolor, effectivelens: head.effectivelens, sensortype: head.sensortype, inbox: head.inbox })
             });
             const json = await response.json()
             if (json.success) {
@@ -188,7 +188,6 @@ function AddElectronic() {
             }
         }
         else if (category === 'Desktop PC') {
-            console.log("EEE")
             const response = await fetch('http://localhost:5000/api/productadd/mobile', {
                 method: 'POST',
                 headers: {
@@ -265,7 +264,7 @@ function AddElectronic() {
                     <React.Fragment >
                         {activeStep === 0 &&
                             <Typography sx={{ mt: 2, mb: 1 }}>
-                                <div className="d-flex justify-content-center">
+                                <div className="d-flex justify-content-between">
                                     <div className='my-3'>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Category:</h6>
                                         <div className='mx-5 productlist' style={{ position: 'relative', right: "3rem" }} onClick={() => { handleopenlist("categorylis_1") }} >
@@ -275,7 +274,7 @@ function AddElectronic() {
                                             <div className='col' style={{ display: 'flex', alignItems: 'center', position: 'absolute', left: '4rem', justifyContent: 'center' }}> <ArrowDropDownIcon />
                                             </div>
                                         </div>
-                                        <ul id='categorylis_1' style={{ listStyle: 'none', width: '11rem', backgroundColor: '#fff', borderRadius: "5px", border: '1px solid #ccc', display: "none", position: 'absolute', right: '27.7rem', top: "11.55rem", zIndex: '10000' }} onMouseLeave={() => { handlelistClose('categorylis_1') }} required >
+                                        <ul id='categorylis_1' style={{ listStyle: 'none', width: '11rem', backgroundColor: '#fff', borderRadius: "5px", border: '1px solid #ccc', display: "none", position: 'absolute',top: "11.55rem", zIndex: '10000' }} onMouseLeave={() => { handlelistClose('categorylis_1') }} required >
                                             <li>
                                                 <MenuItem onClick={() => handleCategory('Headphones')} name='Headphones' value={"Headphones"}>Headphones</MenuItem>
                                             </li>
@@ -302,12 +301,12 @@ function AddElectronic() {
                                             </li>
                                         </ul>
                                     </div>
-                                    <div className='my-3'>
+                                    <div className='my-3'style={{ width: "15rem", position: 'relative', left: '50px' }}>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>Name:</h6>
                                         <input type="text" name="name" id="name" className='mx-5' style={{ position: 'relative', right: '3rem' }} onChange={handledetailsChange} value={details.name} required />
                                     </div>
                                 </div>
-                                <div className="d-flex justify-content-center">
+                                <div className="d-flex justify-content-between">
                                     <div className='my-3'>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Company Name:</h6>
                                         <div className='mx-5 productlist' style={{ right: '3rem' }} onClick={() => { handleopenlist('companylist_1') }} >
@@ -317,7 +316,7 @@ function AddElectronic() {
                                             <div className='col' style={{ display: 'flex', alignItems: 'center', position: 'absolute', left: '4rem', justifyContent: 'center' }}> <ArrowDropDownIcon />
                                             </div>
                                         </div>
-                                        {category === 'Headphones' && <ul id='companylist_1' style={{ listStyle: 'none', width: '11rem', backgroundColor: '#fff', borderRadius: "5px", border: '1px solid #ccc', display: "none", position: 'absolute', right: '27.7rem', top: "16.8rem", zIndex: '10000', height: "10rem", overflowY: 'scroll' }} onMouseLeave={() => { handlelistClose('companylist_1') }} required >
+                                        {category === 'Headphones' && <ul id='companylist_1' style={{ listStyle: 'none', width: '11rem', backgroundColor: '#fff', borderRadius: "5px", border: '1px solid #ccc', display: "none", position: 'absolute',top: "16.8rem", zIndex: '10000', height: "10rem", overflowY: 'scroll' }} onMouseLeave={() => { handlelistClose('companylist_1') }} required >
                                             <li>
                                                 <MenuItem onClick={() => handleChange('Apple')} name='Apple' value={'Apple'}>Apple</MenuItem>
                                             </li>
@@ -589,10 +588,10 @@ function AddElectronic() {
                                             </li>
                                         </ul>}
                                         {category === 'None' && <ul id='companylist_1' style={{ listStyle: 'none', width: '11rem', backgroundColor: '#fff', borderRadius: "5px", border: '1px solid #ccc', display: "none", position: 'absolute', right: '27.7rem', top: "16.8rem", zIndex: '10000', height: "2rem", overflowY: 'scroll' }} onMouseLeave={() => { handlelistClose('companylist_1') }} required >
-                                            
+
                                         </ul>}
                                     </div>
-                                    <div className='my-3'>
+                                    <div className='my-3'style={{ width: "15rem", position: 'relative', left: '50px' }}>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Model Name:</h6>
                                         <input type="text" name="mmodel" id="mmodel" className='mx-5' onChange={handledetailsChange} value={details.mmodel} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
@@ -600,12 +599,32 @@ function AddElectronic() {
                             </Typography>}
                         {(activeStep === 1 && category === "Headphones") &&
                             <Typography sx={{ mt: 2, mb: 1 }}>
-                                <div className="d-flex justify-content-between ">
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }} >
-                                        <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}> Image:</h6>
-                                        <input type="file" name="mobileimage" onChange={convertobase64} id="mobileimage" required />
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '51px' }}>First Image:</h6>
+                                        <input type="file" name="fashionimage1" onChange={convertobase64} id="fashionimage1" style={{ position: "relative", left: '52px' }} required />
                                     </div>
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }} >
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}>Second Image:</h6>
+                                        <input type="file" name="fashionimage2" onChange={convertobase64} id="fashionimage2" style={{ position: "relative", left: '92px', width: "13.1rem" }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '9px' }}>Third Image:</h6>
+                                        <input type="file" name="fashionimage3" onChange={convertobase64} id="fashionimage3" style={{ position: "relative", left: '9px' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}> Fourth Image:</h6>
+                                        <input type="file" name="fashionimage4" onChange={convertobase64} id="fashionimage4" style={{ position: "relative", left: '92px', width: '13.1rem' }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }}>
+                                        <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>Playtime:</h6>
+                                        <input type="text" name="playtime" id="playtime" className='mx-5' onChange={handledetailsChange} value={head.playtime} style={{ position: 'relative', right: '3rem' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: '50px' }}>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}> Connectivity:</h6>
                                         <input type="text" name="connectivity" id="connectivity" className='mx-5' onChange={handledetailsChange} value={head.connectivity} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
@@ -616,7 +635,7 @@ function AddElectronic() {
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>Battery:</h6>
                                         <input type="text" name="battery" id="battery" className='mx-5' onChange={handledetailsChange} value={details.battery} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }}  >
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: '50px' }}  >
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Headphones:</h6>
                                         <div className='mx-5 productlist' style={{ position: 'relative', right: "3rem", width: '12rem' }} onClick={() => { handleopenlist("earphone_1") }}>
                                             <div className="col" style={{ fontSize: '12px' }}>
@@ -642,107 +661,103 @@ function AddElectronic() {
                                     </div>
 
                                 </div>
-                                <div className="d-flex justify-content-between ">
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }}>
-                                        <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>Playtime:</h6>
-                                        <input type="text" name="playtime" id="playtime" className='mx-5' onChange={handledetailsChange} value={head.playtime} style={{ position: 'relative', right: '3rem' }} required />
-                                    </div>
-                                </div>
                             </Typography>
                         }
                         {(activeStep === 1 && category === "Mobile") &&
                             <Typography sx={{ mt: 2, mb: 1 }}>
-                                <div className="d-flex">
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }} >
-                                        <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}> Image:</h6>
-                                        <input type="file" name="mobileimage" onChange={convertobase64} id="mobileimage" required />
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '51px' }}>First Image:</h6>
+                                        <input type="file" name="fashionimage1" onChange={convertobase64} id="fashionimage1" style={{ position: "relative", left: '52px' }} required />
                                     </div>
-                                    <div className='my-3 ' style={{ width: "15rem", position: 'relative', left: "52px" }}>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}>Second Image:</h6>
+                                        <input type="file" name="fashionimage2" onChange={convertobase64} id="fashionimage2" style={{ position: "relative", left: '92px', width: "13.1rem" }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '9px' }}>Third Image:</h6>
+                                        <input type="file" name="fashionimage3" onChange={convertobase64} id="fashionimage3" style={{ position: "relative", left: '9px' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}> Fourth Image:</h6>
+                                        <input type="file" name="fashionimage4" onChange={convertobase64} id="fashionimage4" style={{ position: "relative", left: '92px', width: '13.1rem' }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "10px" }}>
+                                        <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Processor:</h6>
+                                        <input type="text" name="processor" id="processor" className='mx-5' onChange={handledetailsChange} value={details.processor} style={{ position: 'relative', right: '3rem' }} required />
+                                    </div>
+                                    <div className='my-3 ' style={{ width: "15rem", position: 'relative', left: "50px" }}>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Ram Size:</h6>
                                         <input type="text" name="ram" id="ram" className='mx-5 ' onChange={handledetailsChange} value={details.ram} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
                                 </div>
-                                <div className="d-flex justify-content-center ">
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: "43px" }}>
+                                <div className="d-flex justify-content-between ">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "10px" }}>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Internal Storage:</h6>
                                         <input type="text" name="internal" id="internal" className='mx-5' onChange={handledetailsChange} value={details.internal} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "1px" }}>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "50px" }}>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>Battery:</h6>
                                         <input type="text" name="battery" id="battery" className='mx-5' onChange={handledetailsChange} value={details.battery} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
                                 </div>
-                                <div className="d-flex justify-content-center">
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: "43px" }}>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "10px" }}>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Display Size:</h6>
                                         <input type="text" name="display" id="display" className='mx-5' onChange={handledetailsChange} value={details.display} style={{ position: 'relative', right: '3rem' }} required />
 
                                     </div>
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "1px" }}>
-                                        <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Processor:</h6>
-                                        <input type="text" name="processor" id="processor" className='mx-5' onChange={handledetailsChange} value={details.processor} style={{ position: 'relative', right: '3rem' }} required />
-                                    </div>
-                                </div>
-                                <div className='d-flex justify-content-center'>
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '10.2rem' }}>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: '50px' }}>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Camera:</h6>
                                         <input type="text" name="camera" id="camera" className='mx-5' onChange={handledetailsChange} value={details.camera} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
-                                    {category === "Headphones" &&
-                                        <div className='my-3' style={{ position: 'absolute', left: '19.5rem' }} >
-                                            <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Headphones:</h6>
-                                            <div className='mx-5 productlist' style={{ position: 'relative', right: "3rem", width: '12rem' }} onClick={() => { handleopenlist("earphone_1") }}>
-                                                <div className="col" style={{ fontSize: '12px' }}>
-                                                    {headtype}
-                                                </div>
-                                                <div className='col' style={{ display: 'flex', alignItems: 'center', position: 'absolute', left: '4rem', justifyContent: 'center' }}> <ArrowDropDownIcon />
-                                                </div>
-                                            </div>
-                                            <ul id='earphone_1' style={{ listStyle: 'none', width: '12rem', backgroundColor: '#fff', borderRadius: "5px", border: '1px solid #ccc', display: "none", position: 'absolute', right: '6rem', top: "3.3rem", zIndex: '10000' }} onMouseLeave={() => { handlelistClose('earphone_1') }} required >
-                                                <li>
-                                                    <MenuItem onClick={() => handleHeadphones('Bluetooth Headphones')} name='Bluetooth Headphones' value={"Bluetooth Headphones"}>Bluetooth Headphones</MenuItem>
-                                                </li>
-                                                <li>
-                                                    <MenuItem onClick={() => handleHeadphones('Wired Headphones')} name='Wired Headphones' value={'Wired Headphones'}>Wired Headphones</MenuItem>
-                                                </li>
-                                                <li>
-                                                    <MenuItem onClick={() => handleHeadphones('Earbuds')} name='Earbuds' value={'Earbuds'}>Earbuds</MenuItem>
-                                                </li>
-                                                <li>
-                                                    <MenuItem onClick={() => handleHeadphones('Speakers')} name='Speakers' value={'Speakers'}>Speakers</MenuItem>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    }
                                 </div>
                             </Typography>
                         }
                         {(activeStep === 1 && category === "Printer") &&
                             <Typography sx={{ mt: 2, mb: 1 }}>
                                 <div className="d-flex justify-content-between">
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }} >
-                                        <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}> Image:</h6>
-                                        <input type="file" name="mobileimage" onChange={convertobase64} id="mobileimage" required />
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '51px' }}>First Image:</h6>
+                                        <input type="file" name="fashionimage1" onChange={convertobase64} id="fashionimage1" style={{ position: "relative", left: '52px' }} required />
                                     </div>
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }} >
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}>Second Image:</h6>
+                                        <input type="file" name="fashionimage2" onChange={convertobase64} id="fashionimage2" style={{ position: "relative", left: '92px', width: "13.1rem" }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '9px' }}>Third Image:</h6>
+                                        <input type="file" name="fashionimage3" onChange={convertobase64} id="fashionimage3" style={{ position: "relative", left: '9px' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}> Fourth Image:</h6>
+                                        <input type="file" name="fashionimage4" onChange={convertobase64} id="fashionimage4" style={{ position: "relative", left: '92px', width: '13.1rem' }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "10px" }} >
+                                        <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}> Color:</h6>
+                                        <input type="text" name="color" id="color" className='mx-5' onChange={handledetailsChange} value={head.color} style={{ position: 'relative', right: '3rem' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "50px" }} >
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}> PaperSize:</h6>
                                         <input type="text" name="paperSize" id="paperSize" className='mx-5' onChange={handledetailsChange} value={head.paperSize} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-between ">
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }} >
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "10px" }} >
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}> Connectivity:</h6>
                                         <input type="text" name="connectivity" id="connectivity" className='mx-5' onChange={handledetailsChange} value={head.connectivity} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }} >
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "50px" }} >
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}> Page/Minutes:</h6>
                                         <input type="text" name="pageminutes" id="pageminutes" className='mx-5' onChange={handledetailsChange} value={head.pageminutes} style={{ position: 'relative', right: '3rem' }} required />
-                                    </div>
-                                </div>
-                                <div className="d-flex justify-content-between ">
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }} >
-                                        <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}> Color:</h6>
-                                        <input type="text" name="color" id="color" className='mx-5' onChange={handledetailsChange} value={head.color} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
                                 </div>
                             </Typography>
@@ -750,31 +765,51 @@ function AddElectronic() {
                         {(activeStep === 1 && category === "Camera") &&
                             <Typography sx={{ mt: 2, mb: 1 }}>
                                 <div className="d-flex justify-content-between">
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }} >
-                                        <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}> Image:</h6>
-                                        <input type="file" name="mobileimage" onChange={convertobase64} id="mobileimage" required />
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '51px' }}>First Image:</h6>
+                                        <input type="file" name="fashionimage1" onChange={convertobase64} id="fashionimage1" style={{ position: "relative", left: '52px' }} required />
                                     </div>
-                                    <div className='my-3 ' style={{ width: "15rem", position: 'relative', left: "52px" }}>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}>Second Image:</h6>
+                                        <input type="file" name="fashionimage2" onChange={convertobase64} id="fashionimage2" style={{ position: "relative", left: '92px', width: "13.1rem" }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '9px' }}>Third Image:</h6>
+                                        <input type="file" name="fashionimage3" onChange={convertobase64} id="fashionimage3" style={{ position: "relative", left: '9px' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}> Fourth Image:</h6>
+                                        <input type="file" name="fashionimage4" onChange={convertobase64} id="fashionimage4" style={{ position: "relative", left: '92px', width: '13.1rem' }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "10px" }}>
+                                        <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Effective Lens:</h6>
+                                        <input type="text" name="effectivelens" id="effectivelens" className='mx-5' onChange={handledetailsChange} value={head.effectivelens} style={{ position: 'relative', right: '3rem' }} required />
+                                    </div>
+                                    <div className='my-3 ' style={{ width: "15rem", position: 'relative', left: "50px" }}>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Mount:</h6>
                                         <input type="text" name="lensmount" id="lensmount" className='mx-5 ' onChange={handledetailsChange} value={head.lensmount} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-between ">
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }}>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "10px" }}>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Camera Color:</h6>
                                         <input type="text" name="cameracolor" id="cameracolor" className='mx-5' onChange={handledetailsChange} value={head.cameracolor} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "52px" }}>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "50px" }}>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>Battery:</h6>
                                         <input type="text" name="battery" id="battery" className='mx-5' onChange={handledetailsChange} value={details.battery} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-between">
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }}>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "10px" }}>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Display Size:</h6>
                                         <input type="text" name="display" id="display" className='mx-5' onChange={handledetailsChange} value={details.display} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "52px" }}  >
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "50px" }}  >
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Camera Type:</h6>
                                         <div className='mx-5 productlist' style={{ position: 'relative', right: "3rem", width: '12rem' }} onClick={() => { handleopenlist("earphone_1") }}>
                                             <div className="col" style={{ fontSize: '12px' }}>
@@ -816,16 +851,30 @@ function AddElectronic() {
                                         <input type="text" name="sensorsize" id="sensorsize" className='mx-5' onChange={handledetailsChange} value={head.sensorsize} style={{ position: 'relative', right: '3rem' }} required />
                                     </div>
                                 </div>
-                                <div className="d-flex justify-content-between ">
-                                    <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }}>
-                                        <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Effective Lens:</h6>
-                                        <input type="text" name="effectivelens" id="effectivelens" className='mx-5' onChange={handledetailsChange} value={head.effectivelens} style={{ position: 'relative', right: '3rem' }} required />
-                                    </div>
-                                </div>
                             </Typography>
                         }
                         {(activeStep === 1 && category === "Laptop") &&
                             <Typography sx={{ mt: 2, mb: 1 }}>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '51px' }}>First Image:</h6>
+                                        <input type="file" name="fashionimage1" onChange={convertobase64} id="fashionimage1" style={{ position: "relative", left: '52px' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}>Second Image:</h6>
+                                        <input type="file" name="fashionimage2" onChange={convertobase64} id="fashionimage2" style={{ position: "relative", left: '92px', width: "13.1rem" }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '9px' }}>Third Image:</h6>
+                                        <input type="file" name="fashionimage3" onChange={convertobase64} id="fashionimage3" style={{ position: "relative", left: '9px' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}> Fourth Image:</h6>
+                                        <input type="file" name="fashionimage4" onChange={convertobase64} id="fashionimage4" style={{ position: "relative", left: '92px', width: '13.1rem' }} required />
+                                    </div>
+                                </div>
                                 <div className="d-flex justify-content-between">
                                     <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }} >
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}> Image:</h6>
@@ -883,6 +932,26 @@ function AddElectronic() {
                         }
                         {(activeStep === 1 && category === "Trimmer") &&
                             <Typography sx={{ mt: 2, mb: 1 }}>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '51px' }}>First Image:</h6>
+                                        <input type="file" name="fashionimage1" onChange={convertobase64} id="fashionimage1" style={{ position: "relative", left: '52px' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}>Second Image:</h6>
+                                        <input type="file" name="fashionimage2" onChange={convertobase64} id="fashionimage2" style={{ position: "relative", left: '92px', width: "13.1rem" }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '9px' }}>Third Image:</h6>
+                                        <input type="file" name="fashionimage3" onChange={convertobase64} id="fashionimage3" style={{ position: "relative", left: '9px' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}> Fourth Image:</h6>
+                                        <input type="file" name="fashionimage4" onChange={convertobase64} id="fashionimage4" style={{ position: "relative", left: '92px', width: '13.1rem' }} required />
+                                    </div>
+                                </div>
                                 <div className="d-flex justify-content-between">
                                     <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }} >
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}> Image:</h6>
@@ -959,6 +1028,26 @@ function AddElectronic() {
                         {(activeStep === 1 && category === "Smartwatches") &&
                             <Typography sx={{ mt: 2, mb: 1 }}>
                                 <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '51px' }}>First Image:</h6>
+                                        <input type="file" name="fashionimage1" onChange={convertobase64} id="fashionimage1" style={{ position: "relative", left: '52px' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}>Second Image:</h6>
+                                        <input type="file" name="fashionimage2" onChange={convertobase64} id="fashionimage2" style={{ position: "relative", left: '92px', width: "13.1rem" }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '9px' }}>Third Image:</h6>
+                                        <input type="file" name="fashionimage3" onChange={convertobase64} id="fashionimage3" style={{ position: "relative", left: '9px' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}> Fourth Image:</h6>
+                                        <input type="file" name="fashionimage4" onChange={convertobase64} id="fashionimage4" style={{ position: "relative", left: '92px', width: '13.1rem' }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
                                     <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }} >
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}> Image:</h6>
                                         <input type="file" name="mobileimage" onChange={convertobase64} id="mobileimage" required />
@@ -1002,6 +1091,26 @@ function AddElectronic() {
                         }
                         {(activeStep === 1 && category === "Desktop PC") &&
                             <Typography sx={{ mt: 2, mb: 1 }}>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '51px' }}>First Image:</h6>
+                                        <input type="file" name="fashionimage1" onChange={convertobase64} id="fashionimage1" style={{ position: "relative", left: '52px' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}>Second Image:</h6>
+                                        <input type="file" name="fashionimage2" onChange={convertobase64} id="fashionimage2" style={{ position: "relative", left: '92px', width: "13.1rem" }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '9px' }}>Third Image:</h6>
+                                        <input type="file" name="fashionimage3" onChange={convertobase64} id="fashionimage3" style={{ position: "relative", left: '9px' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
+                                        <h6 style={{ fontSize: '13px', position: 'relative', left: '91px' }}> Fourth Image:</h6>
+                                        <input type="file" name="fashionimage4" onChange={convertobase64} id="fashionimage4" style={{ position: "relative", left: '92px', width: '13.1rem' }} required />
+                                    </div>
+                                </div>
                                 <div className="d-flex justify-content-between">
                                     <div className='my-3' style={{ width: "15rem", position: 'relative', left: "8px" }} >
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}> Image:</h6>
@@ -1058,7 +1167,6 @@ function AddElectronic() {
                                 </div>
                             </Typography>
                         }
-                        
                         {activeStep === 2 && <Typography sx={{ mt: 2, mb: 1 }}>
                             <div className="d-flex justify-content-between">
                                 <div className='my-3'>
@@ -1070,12 +1178,16 @@ function AddElectronic() {
                                     <textarea name="information" id="information" cols="30" value={details.information} rows="3" onChange={handledetailsChange} required></textarea>
                                 </div>
                             </div>
-                            {category === "Camera" && <div className="d-flex justify-content-between">
-                            <div className='my-3'>
-                                    <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>In the Box:</h6>
+                            <div className="d-flex justify-content-between">
+                                <div className='my-3 ' style={{ width: "15rem", position: 'relative', left: "10px" }}>
+                                    <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Belong to which Catergory:</h6>
+                                    <input type="text" name="ram" id="ram" className='mx-5 ' onChange={handledetailsChange} value={details.ram} style={{ position: 'relative', right: '3rem' }} required placeholder='Only for owner'/>
+                                </div>
+                                <div className='my-3'style={{ width: "15rem", position: 'relative', right:"8px" }}>
+                                    <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center'}}>In the Box:</h6>
                                     <textarea name="inbox" id="inbox" cols="30" value={head.inbox} rows="3" onChange={handledetailsChange} required></textarea>
                                 </div>
-                            </div>}
+                            </div>
                         </Typography>}
                         <Divider />
                         <Box sx={{ display: 'flexqszz', flexDirection: 'row', pt: 2 }} className='d-flex justify-content-between  my-4'>

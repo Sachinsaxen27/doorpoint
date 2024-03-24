@@ -36,7 +36,7 @@ const BooksSchema = new Schema({
         required: true
     },
     image:{
-        type: String,
+        type: Array,
         required: true
     },
     information:{
@@ -54,6 +54,13 @@ const BooksSchema = new Schema({
     },
     availablelanguages:{
         type:String
+    },
+    rating:{
+        type:Number
+    },
+    fieldsection:{
+        type:String,
+        required:true
     }
 })
 module.exports = mongoose.model('booksadd', BooksSchema)

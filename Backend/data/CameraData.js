@@ -4,6 +4,7 @@ const Printerschema = require('../schema/PrinterSchema')
 const HeadphoneSchema = require('../schema/HeadphonesSchema')
 const Trimmerschema = require('../schema/TrimmerSchema')
 const Smartwatchschema = require('../schema/Smartwatcheschema')
+const Productschema=require('../schema/ProductSchema')
 const router = express.Router()
 
 // ROUTER 1 ADD FOR CAMERA  
@@ -33,7 +34,8 @@ router.post('/camera', async (req, res) => {
             effectivelens: req.body.effectivelens,
             cameracolor: req.body.cameracolor,
             sensortype: req.body.sensortype,
-            inbox: req.body.inbox
+            inbox: req.body.inbox,
+            fieldsection:req.body.fieldsection
             // rating:req.body.rating
         });
         Cameras.save()
@@ -66,7 +68,8 @@ router.post('/printer', async (req, res) => {
             connectivity: req.body.connectivity,
             pageminutes: req.body.pageminutes,
             color: req.body.color,
-            paperSize: req.body.paperSize
+            paperSize: req.body.paperSize,
+            fieldsection:req.body.fieldsection
         });
         printer.save()
         success = true;
@@ -98,7 +101,8 @@ router.post('/headphone', async (req, res) => {
             category: req.body.category,
             information: req.body.information,
             connectivity: req.body.connectivity,
-            playtime: req.body.playtime
+            playtime: req.body.playtime,
+            fieldsection:req.body.fieldsection
         });
         headphone.save()
         success = true;
@@ -132,8 +136,8 @@ router.post('/trimmer', async (req, res) => {
             chargingtime: req.body.chargingtime,
             battery: req.body.battery,
             bladetype: req.body.bladetype,
-            bodytype: req.body.bodytype
-
+            bodytype: req.body.bodytype,
+            fieldsection:req.body.fieldsection
         });
         trimmer.save()
         success = true;
@@ -168,6 +172,7 @@ router.post('/smartwatch', async (req, res) => {
             operatingsystem: req.body.operatingsystem,
             shape: req.body.shape,
             notification: req.body.notification,
+            fieldsection:req.body.fieldsection
         });
         watch.save()
         success = true;
@@ -178,46 +183,51 @@ router.post('/smartwatch', async (req, res) => {
         res.status(500).json({ error }); // Send an error message as a string
     }
 });
-
-
-
 // ROUTER 2 GET ALL CAMERA LIST
 router.get('/getcamera/:camera', async (req, res) => {
     try {
         const data = req.params.camera
         if (data === "None") {
-            const cameralist = await Cameraschema.find({}, { name: 1, company: 1, mmodel: 1, image: 1, price: 1, display: 1, lensmount: 1, battery: 1, category: 1, information: 1, sensorsize: 1, cameratype: 1, effectivelens: 1, cameracolor: 1, sensortype: 1 })
+            const cameralist = await Cameraschema.find({}, { name: 1, company: 1, mmodel: 1, image: 1, price: 1, display: 1, lensmount: 1, battery: 1, category: 1, information: 1, sensorsize: 1, cameratype: 1, effectivelens: 1, cameracolor: 1, sensortype: 1 ,fieldsection:1})
             res.status(200).json(cameralist)
         } else {
-            const cameralist = await Cameraschema.find({ cameratype: data }, { name: 1, company: 1, mmodel: 1, image: 1, price: 1, display: 1, lensmount: 1, battery: 1, category: 1, information: 1, sensorsize: 1, cameratype: 1, effectivelens: 1, cameracolor: 1, sensortype: 1 })
+            const cameralist = await Cameraschema.find({ cameratype: data }, { name: 1, company: 1, mmodel: 1, image: 1, price: 1, display: 1, lensmount: 1, battery: 1, category: 1, information: 1, sensorsize: 1, cameratype: 1, effectivelens: 1, cameracolor: 1, sensortype: 1,fieldsection:1 })
             res.status(200).json(cameralist)
         }
     } catch (error) {
         res.status(400).send("Error")
     }
 })
-// ROUTER 2 GET ALL PRINTER LIST
+// ROUTER 2 GET ALL ITEM LIST
 router.get('/filtercategory/:filter', async (req, res) => {
-    const data=req.params.filter
-    if(data==="Printer"){
-        const printerlist = await Printerschema.find({}, { name: 1, company: 1, mmodel: 1, image: 1, category: 1, price: 1, information: 1, connectivity: 1, color: 1, paperSize: 1, pageminutes: 1 })
+    const data = req.params.filter
+    if (data === "Printer") {
+        const printerlist = await Printerschema.find({}, { name: 1, company: 1, mmodel: 1, image: 1, category: 1, price: 1, information: 1, connectivity: 1, color: 1, paperSize: 1, pageminutes: 1,fieldsection:1 })
         res.status(200).json(printerlist)
     }
-    else if(data==='Headphones'){
-        const headphonelist = await HeadphoneSchema.find({}, { name: 1, company: 1, mmodel: 1, headtype: 1, connectivity: 1, playtime: 1, image: 1, price: 1, battery: 1, category: 1, information: 1 })
+    else if (data === 'Headphones') {
+        const headphonelist = await HeadphoneSchema.find({}, { name: 1, company: 1, mmodel: 1, headtype: 1, connectivity: 1, playtime: 1, image: 1, price: 1, battery: 1, category: 1, information: 1 ,fieldsection:1})
         res.status(200).json(headphonelist)
     }
-    else if(data==='Trimmer'){   
-        const trimmerlist = await Trimmerschema.find({}, { name: 1, company: 1, mmodel: 1, image: 1, price: 1, category: 1, information: 1, waterResistant: 1, color: 1, range: 1, chargingtime: 1, battery: 1, bladetype: 1, bodytype: 1 })
+    else if (data === 'Trimmer') {
+        const trimmerlist = await Trimmerschema.find({}, { name: 1, company: 1, mmodel: 1, image: 1, price: 1, category: 1, information: 1, waterResistant: 1, color: 1, range: 1, chargingtime: 1, battery: 1, bladetype: 1, bodytype: 1,fieldsection:1 })
         res.status(200).json(trimmerlist)
     }
-    else if(data==='Smartwatches'){
-        const smartwatchlist = await Smartwatchschema.find({}, { name: 1, company: 1, mmodel: 1, image: 1, price: 1, sensor: 1, notification: 1, display: 1, battery: 1, category: 1, information: 1, operatingsystem: 1, shape: 1, color: 1 })
+    else if (data === 'Smartwatches') {
+        const smartwatchlist = await Smartwatchschema.find({}, { name: 1, company: 1, mmodel: 1, image: 1, price: 1, sensor: 1, notification: 1, display: 1, battery: 1, category: 1, information: 1, operatingsystem: 1, shape: 1, color: 1,fieldsection:1 })
         res.status(200).json(smartwatchlist)
     }
 })
-
-
+router.get('/allitemlist', async (req, res) => {
+    const printerlist = await Printerschema.findOne({}, { name: 1, company: 1, mmodel: 1, image: 1, category: 1, price: 1, information: 1, connectivity: 1, color: 1, paperSize: 1, pageminutes: 1 ,fieldsection:1})
+    const headphonelist = await HeadphoneSchema.findOne({}, { name: 1, company: 1, mmodel: 1, headtype: 1, connectivity: 1, playtime: 1, image: 1, price: 1, battery: 1, category: 1, information: 1,fieldsection:1 })
+    const trimmerlist = await Trimmerschema.findOne({}, { name: 1, company: 1, mmodel: 1, image: 1, price: 1, category: 1, information: 1, waterResistant: 1, color: 1, range: 1, chargingtime: 1, battery: 1, bladetype: 1, bodytype: 1,fieldsection:1 })
+    const smartwatchlist = await Smartwatchschema.findOne({}, { name: 1, company: 1, mmodel: 1, image: 1, price: 1, sensor: 1, notification: 1, display: 1, battery: 1, category: 1, information: 1, operatingsystem: 1, shape: 1, color: 1 ,fieldsection:1})
+    const mobilelist = await Productschema.findOne({category:"Mobile"}, { name: 1, company: 1, mmodel: 1, image: 1, price: 1, sensor: 1, notification: 1, display: 1, battery: 1, category: 1, information: 1, operatingsystem: 1, shape: 1, color: 1 ,fieldsection:1})
+    const laptoplist = await Productschema.findOne({category:"Laptop"}, { name: 1, company: 1, mmodel: 1, image: 1, price: 1, sensor: 1, notification: 1, display: 1, battery: 1, category: 1, information: 1, operatingsystem: 1, shape: 1, color: 1 ,fieldsection:1})
+    const desktoplist = await Productschema.findOne({category:"Desktop PC"}, { name: 1, company: 1, mmodel: 1, image: 1, price: 1, sensor: 1, notification: 1, display: 1, battery: 1, category: 1, information: 1, operatingsystem: 1, shape: 1, color: 1,fieldsection:1 })
+    res.status(200).json({smartwatchlist,printerlist,headphonelist,trimmerlist,mobilelist,laptoplist,desktoplist})
+})
 // ROUTER 3 GET CAMERA ACCORDING TO FILTER
 // router.get('/filtercamera/:camera', async (req, res) => {
 //     try {

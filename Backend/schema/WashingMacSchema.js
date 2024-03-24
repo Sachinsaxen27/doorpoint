@@ -2,7 +2,7 @@ const mongoose=require('mongoose')
 const { Schema } = mongoose
 const MachineSchema=new  Schema({
     applianceid:{
-        type:Number,
+        type:String,
         required:true
     },
     name:{
@@ -21,7 +21,7 @@ const MachineSchema=new  Schema({
         type:String
     },
     image:{
-        type:String
+        type:Array
     },
     wieght:{
         type:Number,
@@ -62,6 +62,13 @@ const MachineSchema=new  Schema({
     },
     details:{
         type:String
+    },
+    rating:{
+        type:Number
+    },
+    fieldsection:{
+        type:String,
+        required:true
     }
 })
 

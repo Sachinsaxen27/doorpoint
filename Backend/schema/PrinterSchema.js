@@ -17,7 +17,7 @@ const Printerschema = new Schema({
         unique:true,
     },
     image: {
-        type: String,
+        type: Array,
         required: true
     },
     price: {
@@ -47,10 +47,13 @@ const Printerschema = new Schema({
     pageminutes:{
         type:String,
         required:true
+    },
+    rating:{
+        type:String
+    },
+    fieldsection:{
+        type:String,
+        required:true
     }
-    // rating:{
-    //     type:String,
-    //     required:true
-    // }
 })
 module.exports = mongoose.model('printeradd', Printerschema)

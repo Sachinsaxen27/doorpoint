@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import "./Formstyle.css"
 
 
 const steps = ['Basic Info', 'Specifaction', 'Details'];
@@ -30,11 +31,25 @@ function Appliances() {
     const handleTdepth = (event) => {
         setMyTDepth(event.target.value)
     }
+    const [OHieght, setMyOHieght] = useState("")
+    const handleOhieght = (event) => {
+        setMyOHieght(event.target.value)
+    }
+    const [OWidth, setMyOWidth] = useState("")
+    const handleOwidth = (event) => {
+        setMyOWidth(event.target.value)
+    }
+    const [ODepth, setMyODepth] = useState("")
+    const handleOdepth = (event) => {
+        setMyODepth(event.target.value)
+    }
     const [dimension, setMyDimension] = useState("")
+    const[Outdimension,setMyOutDimension]=useState('')
     useEffect(() => {
         setMyDimension(THieght + ' X ' + TWidth + " X " + TDepth)
-    }, [THieght, TWidth, TDepth])
-    console.log(dimension)
+        setMyOutDimension(OHieght+"X"+OWidth+"X"+ODepth)
+        // eslint-disable-next-line
+    }, [THieght, TWidth, TDepth,OHieght,OWidth,ODepth])
     const handleOpenApplianceslist = (List_Id) => {
         const Appliancelist = document.getElementById(List_Id)
         if (Appliancelist.style.display === 'none') {
@@ -84,21 +99,36 @@ function Appliances() {
     const handlelevel = (selectedinput) => {
         setMywaterlevel(selectedinput)
     }
-    const[Toughenedglass,setMyToughenedglass]=useState("")
-    const handleglass=(selectedinput)=>{
+    const [Toughenedglass, setMyToughenedglass] = useState("")
+    const handleglass = (selectedinput) => {
         setMyToughenedglass(selectedinput)
     }
-    const[Stabilizer,setMystabilizer]=useState("")
-    const handlestabliizer=(selectedinput)=>{
+    const [Dehumidification,setMyDehumidification]=useState('')
+    const handledehumdi=(selectedinput)=>{
+        setMyDehumidification(selectedinput)
+    }
+    const [Stabilizer, setMystabilizer] = useState("")
+    const handlestabliizer = (selectedinput) => {
         setMystabilizer(selectedinput)
+    }
+    const [AntibacteriaFilter, setMyantibacteriaFilter] = useState("")
+    const handlebacteriaFilter = (selectedinput) => {
+        setMyantibacteriaFilter(selectedinput)
+    }
+    const [DustFilter, setMydustFilter] = useState("")
+    const handledustFilter = (selectedinput) => {
+        setMydustFilter(selectedinput)
     }
     const [Appliancesdetails, setMyAppliancesdetails] = useState({ applianceid: "", name: "", screensize: "", resolution: "", panelType: "", supportapp: "", nospeaker: "", speakerType: "", soundTechnology: "", ram: "", internal: "", bluetooth: "", hdmi: "", usb: "", wieght: "", appliancetype: "", company: "", details: "", power: "", price: "" })
     const [Machine, setMymachine] = useState({ washingmethod: "", spinspeed: "", dryercapcity: "", dryertype: "", color: "", washcycletime: "", spincycletime: "" })
-    const[Refriger,setMyRefriger]=useState({refrigeratortype:"",defrostingtype:"",compressortype:"",capacity:"",numberdoor:"",coolpad:""})
+    const [Refriger, setMyRefriger] = useState({ refrigeratortype: "", defrostingtype: "", compressortype: "", capacity: "", numberdoor: "", coolpad: "" })
+    const [airconditioner, setMyAirconditioner] = useState({
+        starRating: '', capacityTons: '', coolingcapacity: "", compressor: '', features: "", indoorwieght: "", outwieght: '', powerRequirement: "", annualElectricityConsumption: "", batterytype: '', airflow: ""})
     const handleAppliances = (event) => {
         setMyAppliancesdetails({ ...Appliancesdetails, [event.target.name]: event.target.value })
         setMymachine({ ...Machine, [event.target.name]: event.target.value })
-        setMyRefriger({...Refriger,[event.target.name]:event.target.value})
+        setMyRefriger({ ...Refriger, [event.target.name]: event.target.value })
+        setMyAirconditioner({ ...airconditioner, [event.target.name]: event.target.value })
     }
     const handleAppliancesubmit = async (e) => {
         e.preventDefault()
@@ -120,13 +150,14 @@ function Appliances() {
                 showAlert(`Already Exis`, "danger")
             }
         }
-        else if(ApplianceCate==='Washing Machine'){
+        else if (ApplianceCate === 'Washing Machine') {
             const response = await fetch('http://localhost:5000/api/machineadd/addmachine', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({applianceid: Appliancesdetails.applianceid, appliancecate: ApplianceCate,appliancetype: Appliancesdetails.appliancetype, name: Appliancesdetails.name, image:image,company:Appliancesdetails.company,wieght:Appliancesdetails.wieght,washingmethod:Machine.washingmethod,spinspeed:Machine.spinspeed,dryercapcity:Machine.dryercapcity,dryertype:Machine.dryertype,waterlevel:waterlevel,color:Machine.color,heater:Heater,inverter:inverter,washcycletime:Machine.washcycletime,spincycletime:Machine.spincycletime,details: Appliancesdetails.details,price: Appliancesdetails.price
+                body: JSON.stringify({
+                    applianceid: Appliancesdetails.applianceid, appliancecate: ApplianceCate, appliancetype: Appliancesdetails.appliancetype, name: Appliancesdetails.name, image: image, company: Appliancesdetails.company, wieght: Appliancesdetails.wieght, washingmethod: Machine.washingmethod, spinspeed: Machine.spinspeed, dryercapcity: Machine.dryercapcity, dryertype: Machine.dryertype, waterlevel: waterlevel, color: Machine.color, heater: Heater, inverter: inverter, washcycletime: Machine.washcycletime, spincycletime: Machine.spincycletime, details: Appliancesdetails.details, price: Appliancesdetails.price
                 })
             });
             const json = await response.json()
@@ -137,31 +168,31 @@ function Appliances() {
                 showAlert(`Already Exis`, "danger")
             }
         }
-        else if(ApplianceCate==='Refrigerators'){
+        else if (ApplianceCate === 'Refrigerators') {
             const response = await fetch('http://localhost:5000/api/refriadd/addrefri', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    applianceid: Appliancesdetails.applianceid,
-                    appliancecate: ApplianceCate,
-                    appliancetype: Appliancesdetails.appliancetype,
-                    name: Appliancesdetails.name,
-                    refrigeratortype:Refriger.refrigeratortype,
-                    defrostingtype:Refriger.defrostingtype,
-                    compressortype:Refriger.compressortype,
-                    capacity:Refriger.capacity,
-                    numberdoor:Refriger.numberdoor,
-                    coolpad:Refriger.coolpad,
-                    image:image,
-                    toughenedglass:Toughenedglass,
-                    stabilizer:Stabilizer,
-                    company:Appliancesdetails.company,
-                    wieght:Appliancesdetails.wieght,
-                    color:Machine.color,
-                    details:Appliancesdetails.details,
-                    price: Appliancesdetails.price
+                    applianceid: Appliancesdetails.applianceid, appliancecate: ApplianceCate, appliancetype: Appliancesdetails.appliancetype, name: Appliancesdetails.name, refrigeratortype: Refriger.refrigeratortype, defrostingtype: Refriger.defrostingtype, compressortype: Refriger.compressortype, capacity: Refriger.capacity, numberdoor: Refriger.numberdoor, coolpad: Refriger.coolpad, image: image, toughenedglass: Toughenedglass, stabilizer: Stabilizer, company: Appliancesdetails.company, wieght: Appliancesdetails.wieght, color: Machine.color, details: Appliancesdetails.details, price: Appliancesdetails.price
+                })
+            });
+            const json = await response.json()
+            if (json.success) {
+                showAlert(` Add Successfully`, "success")
+                // pagedirection("/signin")
+            } else {
+                showAlert(`Already Exis`, "danger")
+            }
+        }
+        else if (ApplianceCate === 'Air Conditioners') {
+            const response = await fetch('http://localhost:5000/api/airconditioners/addaircond', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({applianceid:Appliancesdetails.applianceid,name:Appliancesdetails.name,appliancetype:Appliancesdetails.appliancetype,appliancecate:ApplianceCate,company:Appliancesdetails.company,starRating:airconditioner.starRating,capacityTons:airconditioner.capacityTons,color:Machine.color,coolingcapacity:airconditioner.coolingcapacity,compressor:airconditioner.compressor,dehumidification:Dehumidification,remoteControl:Stabilizer,antibacteriaFilter:AntibacteriaFilter,dustFilter:DustFilter,features:airconditioner.features,indoordimension:dimension,indoorwieght:airconditioner.indoorwieght,outdimension:Outdimension,outwieght:airconditioner.outwieght,details:Appliancesdetails.details,price:Appliancesdetails.price,image:image,powerRequirement:airconditioner.powerRequirement,annualElectricityConsumption:airconditioner.annualElectricityConsumption,batterytype:airconditioner.batterytype,airflow:airconditioner.airflow
                 })
             });
             const json = await response.json()
@@ -175,7 +206,6 @@ function Appliances() {
         // http://localhost:5000/api/refriadd/addrefri
 
     }
-    // http://localhost:5000/api/televisionadd/addtelevision
     // Pagination Code Starting
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
@@ -189,10 +219,12 @@ function Appliances() {
     };
     const handleReset = () => {
         setActiveStep(0);
-        setMyRefriger({refrigeratortype:"",defrostingtype:"",compressortype:"",capacity:"",numberdoor:"",coolpad:""})
+        setMyRefriger({ refrigeratortype: "", defrostingtype: "", compressortype: "", capacity: "", numberdoor: "", coolpad: "" })
         setMymachine({ washingmethod: "", spinspeed: "", dryercapcity: "", dryertype: "", color: "", washcycletime: "", spincycletime: "" })
-        setMyAppliancesdetails({ applianceid: "", name: "", screensize: "", resolution: "", panelType: "", supportapp: "", nospeaker: "", speakerType: "", soundTechnology: "", ram: "", internal: "", bluetooth: "", hdmi:"",usb:"",wieght:"", appliancetype: "", company: "", details: "", power: "", price: "" })
+        setMyAppliancesdetails({ applianceid: "", name: "", screensize: "", resolution: "", panelType: "", supportapp: "", nospeaker: "", speakerType: "", soundTechnology: "", ram: "", internal: "", bluetooth: "", hdmi: "", usb: "", wieght: "", appliancetype: "", company: "", details: "", power: "", price: "" })
+        setMyAirconditioner({starRating: '', capacityTons: '', coolingcapacity: "", compressor: '', features: "", indoorwieght: "", outwieght: '', powerRequirement: "", annualElectricityConsumption: "", batterytype: '', airflow: ""})
         setMystabilizer("")
+        setMyApplianceCate("None")
         setMyToughenedglass("")
     };
     return (
@@ -226,7 +258,7 @@ function Appliances() {
                                 <div className="d-flex justify-content-between">
                                     <div className='my-3' >
                                         <h6>Appliance ID <strong>:</strong></h6>
-                                        <input type="number" name="applianceid" id="applianceid" value={Appliancesdetails.applianceid} onChange={handleAppliances} required />
+                                        <input type="text" name="applianceid" id="applianceid" value={Appliancesdetails.applianceid} onChange={handleAppliances} required />
                                     </div>
                                     <div className='my-3' >
                                         <h6>Name <strong>:</strong></h6>
@@ -419,7 +451,7 @@ function Appliances() {
                                         <input type="number" name="washcycletime" id="washcycletime" className='mx-3' onChange={handleAppliances} value={Machine.washcycletime} style={{ position: 'relative', right: '1rem' }} required />
                                     </div>
                                     <div className='my-3'>
-                                        <h6>Ram:</h6>
+                                        <h6>Spin-Cycle Time:</h6>
                                         <input type="number" name="spincycletime" id="spincycletime" className='mx-3' onChange={handleAppliances} value={Machine.spincycletime} style={{ position: 'relative', right: '15px' }} required />
                                     </div>
                                 </div>
@@ -451,11 +483,11 @@ function Appliances() {
                                 <div className="d-flex justify-content-between">
                                     <div className='my-3'>
                                         <h6>Compressor Type:</h6>
-                                        <input type="text" name="compressortype" id="compressortype" className='mx-3' onChange={handleAppliances} value={Refriger.compressortype} style={{ position: 'relative', right: '1rem' }} required/>
+                                        <input type="text" name="compressortype" id="compressortype" className='mx-3' onChange={handleAppliances} value={Refriger.compressortype} style={{ position: 'relative', right: '1rem' }} required />
                                     </div>
                                     <div className='my-3' style={{ position: 'relative', right: '32px' }}>
                                         <h6>Capacity:</h6>
-                                        <input type="number" name="capacity" id="capacity" onChange={handleAppliances} value={Refriger.capacity} required/>
+                                        <input type="number" name="capacity" id="capacity" onChange={handleAppliances} value={Refriger.capacity} required />
                                     </div>
                                 </div>
                                 <div className="d-flex justify-content-between">
@@ -476,7 +508,7 @@ function Appliances() {
                                             <FormControlLabel value="No" onClick={() => handleglass('No')} name='No' control={<Radio />} label="No" />
                                         </RadioGroup>
                                     </div>
-                                    <div className='my-3'style={{ position: 'relative', right: '90px' }}>
+                                    <div className='my-3' style={{ position: 'relative', right: '90px' }}>
                                         <h6>Stabilizer:</h6>
                                         <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" >
                                             <FormControlLabel value='Yes' name='Yes' control={<Radio />} onClick={() => handlestabliizer('Yes')} label="Yes" />
@@ -489,7 +521,103 @@ function Appliances() {
                                         <h6>Color:</h6>
                                         <input type="text" name="color" id="color" className='mx-3' onChange={handleAppliances} value={Machine.color} style={{ position: 'relative', right: '15px' }} required />
                                     </div>
-                                    
+
+                                </div>
+                            </Typography>
+                        }
+                        {(activeStep === 1 && ApplianceCate === 'Air Conditioners') &&
+                            <Typography sx={{ mt: 2, mb: 1 }}>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3'>
+                                        <h6 >Image:</h6>
+                                        <input type="file" name="toysbeautyimage" onChange={convertobase64} id="toysbeautyimage" required />
+                                    </div>
+                                    <div className='my-3' >
+                                        <h6>Company:</h6>
+                                        <input type="text" name="company" id="company" className='mx-3' onChange={handleAppliances} value={Appliancesdetails.company} style={{ position: 'relative', right: '1rem' }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3'>
+                                        <h6>Color:</h6>
+                                        <input type="text" name="color" id="color" className='mx-3' onChange={handleAppliances} value={Machine.color} style={{ position: 'relative', right: '15px' }} required />
+                                    </div>
+                                    <div className='my-3'>
+                                        <h6>Compressor:</h6>
+                                        <input type="text" name="compressor" id="compressor" className='mx-3' onChange={handleAppliances} value={airconditioner.compressor} style={{ position: 'relative', right: '1rem' }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3'>
+                                        <h6>Cooling Capacity:</h6>
+                                        <input type="number" name="coolingcapacity" id="coolingcapacity" className='mx-3' onChange={handleAppliances} value={airconditioner.coolingcapacity} style={{ position: 'relative', right: '1rem' }} required />
+                                    </div>
+                                    <div className='my-3' style={{ position: 'relative', right: '32px' }}>
+                                        <h6>Air Flow Direction:</h6>
+                                        <input type="text" name="airflow" id="airflow" onChange={handleAppliances} value={airconditioner.airflow} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3'>
+                                        <h6>Capacity Tons:</h6>
+                                        <input type="number" name="capacityTons" id="capacityTons" className='mx-3' onChange={handleAppliances} value={airconditioner.capacityTons} style={{ position: 'relative', right: '1rem' }} required />
+                                    </div>
+                                    <div className='my-3'>
+                                        <h6>Star Rating:</h6>
+                                        <input type="text" name="starRating" id="starRating" className='mx-3' onChange={handleAppliances} value={airconditioner.starRating} style={{ position: 'relative', right: '16px' }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3'>
+                                        <h6>Dehumidification:</h6>
+                                        <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" >
+                                            <FormControlLabel value='Yes' name='Yes' control={<Radio />} onClick={() => handledehumdi('Yes')} label="Yes" />
+                                            <FormControlLabel value="No" onClick={() => handledehumdi('No')} name='No' control={<Radio />} label="No" />
+                                        </RadioGroup>
+                                    </div>
+                                    <div className='my-3' style={{ position: 'relative', right: '90px' }}>
+                                        <h6>Remote Control:</h6>
+                                        <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" >
+                                            <FormControlLabel value='Yes' name='Yes' control={<Radio />} onClick={() => handlestabliizer('Yes')} label="Yes" />
+                                            <FormControlLabel value="No" onClick={() => handlestabliizer('No')} name='No' control={<Radio />} label="No" />
+                                        </RadioGroup>
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3'>
+                                        <h6>Anti-bacteria Filter:</h6>
+                                        <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" >
+                                            <FormControlLabel value='Yes' name='Yes' control={<Radio />} onClick={() => handlebacteriaFilter('Yes')} label="Yes" />
+                                            <FormControlLabel value="No" onClick={() => handlebacteriaFilter('No')} name='No' control={<Radio />} label="No" />
+                                        </RadioGroup>
+                                    </div>
+                                    <div className='my-3' style={{ position: 'relative', right: '90px' }}>
+                                        <h6>Dust Filter:</h6>
+                                        <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" >
+                                            <FormControlLabel value='Yes' name='Yes' control={<Radio />} onClick={() => handledustFilter('Yes')} label="Yes" />
+                                            <FormControlLabel value="No" onClick={() => handledustFilter('No')} name='No' control={<Radio />} label="No" />
+                                        </RadioGroup>
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3'>
+                                        <h6>Features:</h6>
+                                        <input type="text" name="features" id="features" className='mx-3' onChange={handleAppliances} value={airconditioner.features} style={{ position: 'relative', right: '15px' }} required />
+                                    </div>
+                                    <div className='my-3'>
+                                        <h6>Battery Type:</h6>
+                                        <input type="text" name="batterytype" id="batterytype" className='mx-3' onChange={handleAppliances} value={airconditioner.batterytype} style={{ position: 'relative', right: '15px' }} required />
+                                    </div>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <div className='my-3'>
+                                        <h6>Power Requirement:</h6>
+                                        <input type="text" name="powerRequirement" id="powerRequirement" className='mx-3' onChange={handleAppliances} value={airconditioner.powerRequirement} style={{ position: 'relative', right: '15px' }} required />
+                                    </div>
+                                    <div className='my-3'>
+                                        <h6>Electricity Consumption:</h6>
+                                        <input type="number" name="annualElectricityConsumption" id="annualElectricityConsumption" className='mx-3' onChange={handleAppliances} value={airconditioner.annualElectricityConsumption} style={{ position: 'relative', right: '15px' }} required />
+                                    </div>
                                 </div>
                             </Typography>
                         }
@@ -514,11 +642,43 @@ function Appliances() {
                                             Depth: <input type="number" className='my-1' name="TDepth" id="TDepth" style={{ width: '3rem', position: "relative", left: '5px' }} onChange={handleTdepth} value={TDepth} />
                                         </div>
                                     </div>}
-                                    <div className='my-3'>
+                                    {ApplianceCate !== 'Air Conditioners' && <div className='my-3'>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>Wieght:</h6>
                                         <input type='number' name="wieght" id="wieght" onChange={handleAppliances} value={Appliancesdetails.wieght} required />
-                                    </div>
+                                    </div>}
                                 </div>
+                                {ApplianceCate === 'Air Conditioners' &&
+                                    <div className="d-flex justify-content-between">
+                                        <div className='my-3'>
+                                            <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>Indoor Wieght:</h6>
+                                            <input type='number' name="indoorwieght" id="indoorwieght" onChange={handleAppliances} value={airconditioner.indoorwieght} required />
+                                        </div>
+                                        <div className='my-3'>
+                                            <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>Outdoor Wieght:</h6>
+                                            <input type='number' name="outwieght" id="outwieght" onChange={handleAppliances} value={airconditioner.outwieght} required />
+                                        </div>
+                                    </div>
+                                }
+                                {ApplianceCate === 'Air Conditioners' &&
+                                    <div className="d-flex justify-content-between">
+                                        <div className='my-3'>
+                                            <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Indoor Dimension:</h6>
+                                            <div className="d-grid">
+                                                Hieght: <input type="number" className='my-1' name="THieght" id="THieght" style={{ width: '3rem' }} onChange={handleThieght} value={THieght} />
+                                                &nbsp; Width: <input type="number" name="TWidth" id="TWidth" style={{ width: '3rem' }} onChange={handleTwidth} value={TWidth} /> <br />
+                                                Depth: <input type="number" className='my-1' name="TDepth" id="TDepth" style={{ width: '3rem', position: "relative", left: '5px' }} onChange={handleTdepth} value={TDepth} />
+                                            </div>
+                                        </div>
+                                        <div className='my-3'>
+                                            <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'end' }}>Outdoor Dimension:</h6>
+                                            <div className="d-grid">
+                                                Hieght: <input type="number" className='my-1' name="OHieght" id="OHieght" style={{ width: '3rem' }} onChange={handleOhieght} value={OHieght} />
+                                                &nbsp; Width: <input type="number" name="OWidth" id="OWidth" style={{ width: '3rem' }} onChange={handleOwidth} value={OWidth} /> <br />
+                                                Depth: <input type="number" className='my-1' name="ODepth" id="ODepth" style={{ width: '3rem', position: "relative", left: '5px' }} onChange={handleOdepth} value={ODepth} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
                             </Typography>
                         }
                         <Divider />

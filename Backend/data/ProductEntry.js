@@ -30,6 +30,7 @@ router.post('/mobile', async (req, res) => {
             graphiccard: req.body.graphiccard,
             storagetype: req.body.storagetype,
             hddstorage: req.body.hddstorage,
+            fieldsection:req.body.fieldsection
         });
         product.save()
         success = true;
@@ -44,12 +45,11 @@ router.post('/mobile', async (req, res) => {
 router.get('/getmobile/:mobile', async (req, res) => {
     try {
         const data = req.params.mobile
-        console.log(data,'sdsd')   
         if (data === "None") {
-           const mobilelist= await ProductSchema.find({}, { company: 1, mmodel: 1, name: 1, image: 1, ram: 1, internal: 1, display: 1, camera: 1, processor: 1, information: 1, price: 1, category: 1 })
+           const mobilelist= await ProductSchema.find({}, { company: 1, mmodel: 1, name: 1, image: 1, ram: 1, internal: 1, display: 1, camera: 1, processor: 1, information: 1, price: 1, category: 1 ,fieldsection:1})
             res.status(200).json(mobilelist )
         } else {
-            const mobilelist=await ProductSchema.find({ category: data }, { company: 1, mmodel: 1, name: 1, image: 1, ram: 1, internal: 1, display: 1, camera: 1, processor: 1, information: 1, price: 1, category: 1 })        
+            const mobilelist=await ProductSchema.find({ category: data }, { company: 1, mmodel: 1, name: 1, image: 1, ram: 1, internal: 1, display: 1, camera: 1, processor: 1, information: 1, price: 1, category: 1,fieldsection:1 })        
             res.status(200).json(mobilelist)
         }
     } catch (error) {

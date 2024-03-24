@@ -1,0 +1,171 @@
+.itemview {
+    margin: 0px auto;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.image_group {
+    display: flex;
+    flex-direction: column;
+}
+
+.third_column {
+    border: 1px solid black;
+    position: relative;
+    top: 15px;
+    right: 21px;
+}
+
+.freedelivery {
+    font-size: 12px;
+}
+
+.delivery {
+    color: #007185;
+    font-weight: 600;
+}
+
+.delivery:hover {
+    color: rgb(199, 81, 31);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.tag {
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.locationplace {
+    display: flex;
+    font-size: 13px;
+}
+
+.item_info {
+    width: 31.3rem;
+}
+
+.shippindetails {
+    border: 1px solid gray;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timer {
+    color: #007600;
+    font-weight: 600;
+}
+
+.ratingprice {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cartbutton {
+    border: 1px solid gray;
+    border-radius: 4px;
+    height: 100px;
+}
+
+.cartbutton_1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn_1 {
+    width: 36px;
+}
+
+.quantity_1 {
+    display: flex;
+    align-items: center;
+}
+
+.quantityinput {
+    text-align: center;
+    width: 47px;
+    background-color: #efefef;
+    border: none;
+    height: 31px;
+    border: 1px solid;
+}
+
+.button_group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wishlist {
+    display: flex;
+    justify-content: center;
+}
+
+.wishlist button {
+    display: flex;
+}
+
+.listoffer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.listoffer ul {
+    list-style: none;
+    font-weight: 400;
+}
+
+/* .listoffer ul li{
+    display: flex;
+    align-items: center;
+} */
+.scrolloption img {
+    height: 30px;
+}
+
+.listgroup_2 {
+    width: 300px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    white-space: nowrap;
+    height: 105px;
+    display: flex;
+    align-items: center;
+}
+
+.itemgroup_2 {
+    /* width: 4.7rem; */
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    white-space: break-spaces;
+}
+.itemgroup_2 span {
+    text-align: center;
+    width: 4.2rem;
+    font-size: 10px;
+}
+.information1{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.entryinformation{
+    width: 77.7rem;
+    height:fit-content; 
+    overflow:hidden;
+}
+.information1 span{
+    color: #007185;
+}
+/* height: 25rem; */
+    /* .big_image img{
+    position: absolute;
+    left: 71px;
+    top: 4px;
+    } */

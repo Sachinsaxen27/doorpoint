@@ -17,7 +17,7 @@ const Trimmerschema = new Schema({
         unique:true,
     },
     image: {
-        type: String,
+        type: Array,
         required: true
     },
     price: {
@@ -59,10 +59,13 @@ const Trimmerschema = new Schema({
     bodytype:{
         type:String,
         required:true
+    },
+    rating:{
+        type:String
+    },
+    fieldsection:{
+        type:String,
+        required:true
     }
-    // rating:{
-    //     type:String,
-    //     required:true
-    // }
 })
 module.exports = mongoose.model('trimmeradd', Trimmerschema)

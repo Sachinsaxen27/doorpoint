@@ -34,7 +34,7 @@ const GroomingSchema = new Schema({
         required: true
     },
     image:{
-        type: String,
+        type:Array,
         required: true
     },
     gender:{
@@ -42,6 +42,25 @@ const GroomingSchema = new Schema({
         required:true
     },
     information:{
+        type:String,
+        required:true
+    },
+    idealfor:{
+        type:String
+    },
+    ptype:{
+        type:String
+    },
+    skintype:{
+        type:String
+    },
+    appiledfor:{
+        type:String
+    },
+    rating:{
+        type:Number
+    },
+    fieldsection:{
         type:String,
         required:true
     }

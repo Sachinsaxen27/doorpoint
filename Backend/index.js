@@ -27,6 +27,8 @@ app.use('/api/booksadd',require('./data/Toys&BeautyData'))
 app.use('/api/televisionadd',require('./data/AppliancesData'))
 app.use('/api/machineadd',require('./data/AppliancesData'))
 app.use('/api/refriadd',require('./data/AppliancesData'))
+app.use('/api/airconditioners',require('./data/AppliancesData'))
+app.use('/api/addcart',require('./data/AddCartData'))
 app.listen(port,()=>{
     console.log(`DoorPoint App is listening at http://localhost:${port}`)
 })

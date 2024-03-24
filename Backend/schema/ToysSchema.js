@@ -55,6 +55,13 @@ const ToysSchema=new Schema({
     },
     rechargeable:{
         type:String
+    },
+    rating:{
+        type:Number
+    },
+    fieldsection:{
+        type:String,
+        required:true
     }
 })
 module.exports = mongoose.model('toysadd', ToysSchema)

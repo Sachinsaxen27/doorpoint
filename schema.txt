@@ -1,0 +1,33 @@
+Accessories:-,,itemtype,,,,,gender,,material,producttype,productarea,productpocket,productcardslot,jewelltype,plating,gemstone,bagtype,ratinformationdeting,fieldsection
+
+AirConditioner:- ,,appliancetype,appliancecate,,starRating,capacityTons,,coolingcapacity,compressor,dehumidification,remoteControl,antibacteriaFilter,dustFilter,features,indoordimension,indoorwieght,outdimension,outwieght,,,,powerRequirement,annualElectricityConsumption,batterytype,airflow,rating,fieldsection
+
+BookSchema:-,,itemtype,producttype,publishdate,,binding,nopage,,,,languages,edition,author,availablelanguages,rating,fieldsection
+
+CameraSchema:-,,,,,display,lensmount,battery,category,,sensorsize,cameratype,effectivelens,sensortype,inbox,rating,fieldsection
+
+FashionSchema:-,,itemtype,,,size,material,,,gender,,clothestype,forwho,clotheCategory,pattern,rating,fieldsection
+
+FootwearSchema:-,,itemtype,,,size,material,,,gender,,footweartype,rating,fieldsection
+
+GroominSchema:-,,itemtype,,groomingtype,lifeshell,quantity,,,gender,,idealfor,ptype,skintype,appiledfor,rating,fieldsection
+
+HeadphonesSchema:- ,,,headtype,connectivity,playtime,,,battery,category,,rating,fieldsection
+
+PrinterSchema:-,,,,,category,,connectivity,,paperSize,pageminutes,rating,fieldsection
+
+ProductSchema:-,,,,,ram,internal,display,camera,processor,battery,category,,operatingsystem,graphiccard,hddstorage,storagetype,rating,fieldsection
+
+RefrigeratorSchema:-,,appliancetype,appliancecate,,refrigeratortype,defrostingtype,compressortype,capacity,numberdoor,coolpad,toughenedglass,stabilizer,,,,,wieght,rating,fieldsection
+
+SmartWatchSchema:-,,,,,sensor,notification,display,battery,category,,operatingsystem,shape,,rating,fieldsection
+
+TelevisionSchema:-,,appliancetype,appliancecate,,screensize,resolution,smartTV,panelType,supportapp,nospeaker,speakerType,soundTechnology,ram,internal,bluetooth,hdmi,usb,dimension,wieght,,,,power,rating,fieldsection
+
+ToySchema:-,,category,producttype,age,,,material,,dimensions,,recommandplayer,,features,includeaccess,notes,rechargeable,rating,fieldsection
+
+TrimmerSchema:-,,,,,category,,waterResistant,,range,chargingtime,battery,bladetype,bodytype,rating,fieldsection
+
+MachineSchema:-,,appliancetype,appliancecate,,,wieght,washingmethod,spinspeed,dryercapcity,dryertype,waterlevel,,heater,inverter,washcycletime,spincycletime,,,rating,fieldsection
+
+WatchSchema:-,,itemtype,,,watchshape,watchstrap,gender,watchconsole,rating,fieldsection

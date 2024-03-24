@@ -36,7 +36,7 @@ const fashionschema = new Schema({
         required: true
     },
     image:{
-        type: String,
+        type: Array,
         required: true
     },
     gender:{
@@ -50,6 +50,42 @@ const fashionschema = new Schema({
     clothestype:{
         type:String,
         required:true
+    },
+    forwho:{
+        type:String
+    },
+    clotheCategory:{
+        type:String
+    },
+    pattern:{
+        type:String
+    },
+    rating:{
+        type:Number
+    },
+    fieldsection:{
+        type:String
+    },
+    sarilength:{
+        type:Number
+    },
+    weight:{
+        type:Number
+    },
+    neck:{
+        type:String
+    },
+    sleeve:{
+        type:String
+    },
+    bottomtype:{
+        type:String
+    },
+    inthebox:{
+        type:String
+    },
+    fit:{
+        type:String
     }
 })
 module.exports = mongoose.model('fashionadd', fashionschema)

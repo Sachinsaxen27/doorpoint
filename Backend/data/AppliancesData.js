@@ -3,9 +3,9 @@ const router=express.Router()
 const Television=require('../schema/TelevisionSchema')
 const MachineSchema=require('../schema/WashingMacSchema')
 const RefrigeratorSchema=require("../schema/RefrigeratorSchema")
+const AirConditionerSchema=require('../schema/AirCSchema')
 // ROUTER 1 FOR ADDING TELEVISION
 // http://localhost:5000/api/televisionadd/addtelevision
-
 router.post('/addtelevision',async(req,res)=>{
     let success = false;
     try {
@@ -14,11 +14,8 @@ router.post('/addtelevision',async(req,res)=>{
             return res.status(400).json({ success: false });
         }
         const photobuffer = req.body.image
-        // console.log("photobuffer",photobuffer)
-        // console.log("photobuffer",req.body.bluetooth)
-        // console.log("photobuffer",req.body.smartTV)
-        console.log("photobuffer",req.body.price)
-        
+        // console.log("photobuffer",req.body.price)
+        const ratings=req.body.rating||2
         tv = await Television.create({
             applianceid:req.body.applianceid,
             name:req.body.name,
@@ -43,7 +40,9 @@ router.post('/addtelevision',async(req,res)=>{
             wieght:req.body.wieght,
             details:req.body.details,
             price:req.body.price,
-            power:req.body.power
+            power:req.body.power,
+            rating:ratings,
+            fieldsection:req.body.fieldsection
         });
         success = true;
         // console.log("Success:", success); // Add this line for debugging
@@ -62,6 +61,7 @@ router.post('/addmachine',async(req,res)=>{
         if(machine){
             return res.status(400).json({ success: false });
         }
+        const ratings=req.body.rating||2
         const photobuffer = req.body.image
         machine=await MachineSchema.create({
             applianceid:req.body.applianceid,
@@ -82,7 +82,9 @@ router.post('/addmachine',async(req,res)=>{
             washcycletime:req.body.washcycletime,
             spincycletime:req.body.spincycletime,
             price:req.body.price,
-            details:req.body.details
+            details:req.body.details,
+            rating:ratings,
+            fieldsection:req.body.fieldsection
         })
         success = true;
         // console.log("Success:", success); // Add this line for debugging
@@ -101,7 +103,7 @@ router.post('/addrefri',async(req,res)=>{
         if(refri){
             return res.status(400).json({ success: false });
         }
-        console.log("SS")
+        // console.log("SS")
         const photobuffer = req.body.image
         refri=await RefrigeratorSchema.create({
             applianceid:req.body.applianceid,
@@ -121,7 +123,8 @@ router.post('/addrefri',async(req,res)=>{
             price:req.body.price,  
             details:req.body.details,
             color:req.body.color,
-            wieght:req.body.wieght
+            wieght:req.body.wieght,
+            fieldsection:req.body.fieldsection
         })
         success = true;
         // console.log("Success:", success); // Add this line for debugging
@@ -130,23 +133,71 @@ router.post('/addrefri',async(req,res)=>{
         console.log(error)
     }
 })
-
-
-
-//ROUTER 4 FOR GET ALL TELEVISION LIST  
+// ROUTER 4 FOR ADDING REFRIGERATOR
+// http://localhost:5000/api/refriadd/addtelevision
+router.post('/addaircond',async(req,res)=>{
+    let success=true
+    try{
+        let aircond=await AirConditionerSchema.findOne({applianceid:req.body.applianceid})
+        if(aircond){
+            return res.status(400).json({ success: false });
+        }
+        // console.log("SS")
+        const photobuffer = req.body.image
+        aircond=await AirConditionerSchema.create({
+            applianceid:req.body.applianceid,
+            name:req.body.name,
+            appliancetype:req.body.appliancetype,
+            appliancecate:req.body.appliancecate,
+            company:req.body.company,
+            starRating:req.body.starRating,
+            capacityTons:req.body.capacityTons,
+            color:req.body.color,
+            coolingcapacity:req.body.coolingcapacity,
+            compressor:req.body.compressor,
+            dehumidification:req.body.dehumidification,
+            remoteControl:req.body.remoteControl,
+            antibacteriaFilter:req.body.antibacteriaFilter,
+            dustFilter:req.body.dustFilter,
+            features:req.body.features,
+            indoordimension:req.body.indoordimension,
+            indoorwieght:req.body.indoorwieght,
+            outdimension:req.body.outdimension,
+            outwieght:req.body.outwieght,
+            details:req.body.details,
+            price:req.body.price,
+            image:photobuffer,
+            powerRequirement:req.body.powerRequirement,
+            annualElectricityConsumption:req.body.annualElectricityConsumption,
+            batterytype:req.body.batterytype,
+            airflow:req.body.airflow,
+            fieldsection:req.body.fieldsection
+        })
+        success = true;
+        // console.log("Success:", success); // Add this line for debugging
+        res.json({ success }); // Send a JSON response
+    }catch(error){
+        console.log(error)
+    }
+})
+//ROUTER 5 FOR GET ALL TELEVISION LIST  
 router.get('/gettelevision',async(req,res)=>{
-    const televisionlist=await Television.find({},{applianceid:1,name:1,appliancetype:1,appliancecate:1,image:1,company:1,screensize:1,resolution:1,smartTV:1,panelType:1,supportapp:1,nospeaker:1,speakerType:1,soundTechnology:1,ram:1,internal:1,bluetooth:1,hdmi:1,usb:1,dimension:1,wieght:1,details:1,price:1,power:1})
+    const televisionlist=await Television.find({},{applianceid:1,name:1,appliancetype:1,appliancecate:1,image:1,company:1,screensize:1,resolution:1,smartTV:1,panelType:1,supportapp:1,nospeaker:1,speakerType:1,soundTechnology:1,ram:1,internal:1,bluetooth:1,hdmi:1,usb:1,dimension:1,wieght:1,details:1,price:1,power:1,fieldsection:1})
     res.status(200).json({ televisionlist })
 })
-//ROUTER 5 FOR GET ALL WASHING MACHINE LIST
+//ROUTER 6 FOR GET ALL WASHING MACHINE LIST
 router.get('/getmachine',async(req,res)=>{
-    const machinelist=await MachineSchema.find({},{applianceid:1,appliancecate:1,appliancetype:1,name:1,company:1,wieght:1,washingmethod:1,spinspeed:1,dryercapcity:1,dryertype:1,waterlevel:1,color:1,heater:1,inverter:1,washcycletime:1,spincycletime:1,price:1,details:1,image:1})
+    const machinelist=await MachineSchema.find({},{applianceid:1,appliancecate:1,appliancetype:1,name:1,company:1,wieght:1,washingmethod:1,spinspeed:1,dryercapcity:1,dryertype:1,waterlevel:1,color:1,heater:1,inverter:1,washcycletime:1,spincycletime:1,price:1,details:1,image:1,fieldsection:1})
     res.status(200).json({ machinelist })
 })
-//ROUTER 5 FOR GET ALL REFRIGERATOR LIST
+//ROUTER 7 FOR GET ALL REFRIGERATOR LIST
 router.get('/getrefri',async(req,res)=>{
-    const refrilist=await RefrigeratorSchema.find({},{applianceid:1,name:2,appliancetype:1,appliancecate:1,company:1,refrigeratortype:1,defrostingtype:1,compressortype:1,capacity:1,numberdoor:1,coolpad:1,toughenedglass:1,stabilizer:1,image:1,price:1,details:1,color:1,wieght:1})
+    const refrilist=await RefrigeratorSchema.find({},{applianceid:1,name:2,appliancetype:1,appliancecate:1,company:1,refrigeratortype:1,defrostingtype:1,compressortype:1,capacity:1,numberdoor:1,coolpad:1,toughenedglass:1,stabilizer:1,image:1,price:1,details:1,color:1,wieght:1,fieldsection:1})
     res.status(200).json({ refrilist })
+})
+//ROUTER 8 FOR GET ALL ITEM LIST
+router.get('/getallitem',async(req,res)=>{
+    
 })
 
 module.exports = router

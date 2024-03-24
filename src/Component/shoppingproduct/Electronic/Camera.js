@@ -10,12 +10,11 @@ function Camera() {
   const handlepage = (selectedinput) => {
     showFliter(selectedinput)
   }
-  console.log(cameralist,'s')
   useEffect(() => {
     if (location.pathname === '/camera') {
       showFliter("None")
     }
-  }, [location.pathname, showFliter])
+  }, [location.pathname,showFliter])
 
   return (
     <>
@@ -83,37 +82,6 @@ function Camera() {
       <div className='container row mx-5' style={{ position: 'absolute', left: '41px' }}>
         {cameralist && (cameralist)?.map((element, index) => {
           return <CardProduct element={element} key={index} />
-          //  <Card sx={{ maxWidth: 260 }} key={index} className='col-4 mx-1 my-2'>
-          //   <CardActionArea>
-          //     <CardMedia
-          //       component="img"
-          //       height="200"
-          //       image={element.image}
-          //       alt="green iguana"
-          //       style={{ width: '13rem', position: 'relative', left: '27px' }}
-          //     />
-          //   </CardActionArea>
-          //   <Divider />
-          //   <CardContent>
-          //     <Typography gutterBottom variant="h5" component="div">
-          //      {element.company} {element.name}
-          //     </Typography>
-          //     <Typography variant="body2" color="text.secondary">
-          //       {(element.information).slice(0, 50)}...
-          //     </Typography>
-          //     <Typography variant="body2" color="text.secondary">
-          //       <strong>
-          //         &#x20B9;{element.price}
-          //       </strong>
-          //     </Typography>
-          //   </CardContent>
-          //   <Rating name="read-only" value={3.5} precision={0.5} readOnly style={{ position: "relative", top: '0.7rem', left: '10.1px', fontSize: '16px' }} />
-          //   <CardActions style={{ position: 'sticky', top: '34.3rem' }}>
-          //     <Button size="small" color="primary" onClick={handleCart}>
-          //       Add to Cart
-          //     </Button>
-          //   </CardActions>
-          // </Card>
         })}
       </div>
     </>

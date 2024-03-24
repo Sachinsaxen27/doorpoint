@@ -2,7 +2,7 @@ const mongoose=require("mongoose")
 const {Schema}=mongoose
 const RefrigeratorSchema=new Schema({
     applianceid:{
-        type:Number,
+        type:String,
         required:true
     },
     name:{
@@ -49,7 +49,7 @@ const RefrigeratorSchema=new Schema({
         type:String
     },
     image:{
-        type:String,
+        type:Array,
         required:true
     },
     price:{
@@ -63,6 +63,13 @@ const RefrigeratorSchema=new Schema({
     },
     wieght:{
         type:Number
+    },
+    rating:{
+        type:Number
+    },
+    fieldsection:{
+        type:String,
+        required:true
     }
 })
 

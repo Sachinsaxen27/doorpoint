@@ -17,7 +17,7 @@ const Smartwatchschema = new Schema({
         unique:true,
     },
     image: {
-        type: String,
+        type: Array,
         required: true
     },
     price: {
@@ -51,6 +51,13 @@ const Smartwatchschema = new Schema({
     },
     color:{
         type:String
+    },
+    rating:{
+        type:Number
+    },
+    fieldsection:{
+        type:String,
+        required:true
     }
 })
 module.exports = mongoose.model('watchesadd', Smartwatchschema)

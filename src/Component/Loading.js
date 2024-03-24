@@ -7,7 +7,8 @@ function Loading() {
             <div className="text-center" style={{backgroundColor:'rgb(255 249 249)',height:'20rem',width:'25rem'}}>
                 <img src={logo} alt="" style={{height:'14rem',width:'14rem'}} />
                 <br />
-                <img src="https://www.linkpicture.com/q/spinner.gif" alt="" />
+                <h3>DoorPoint</h3>
+                {/* <img src="https://www.linkpicture.com/q/spinner.gif" alt="" /> */}
             </div>
         </div>
         </>

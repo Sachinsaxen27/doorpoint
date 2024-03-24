@@ -13,3 +13,8 @@
     height: 10rem;
     overflow-y: scroll
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

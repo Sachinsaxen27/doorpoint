@@ -29,7 +29,7 @@ const HeadphoneSchema = new Schema({
         required:true
     },
     image: {
-        type: String,
+        type: Array,
         required: true
     },
     price: {
@@ -44,6 +44,13 @@ const HeadphoneSchema = new Schema({
         required:true
     },
     information:{
+        type:String,
+        required:true
+    },
+    rating:{
+        type:Number
+    },
+    fieldsection:{
         type:String,
         required:true
     }

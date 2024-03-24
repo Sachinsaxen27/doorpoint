@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import 'react-multi-carousel/lib/styles.css'
 import Carousel from 'react-multi-carousel'
 import './Style.css'
 import { Link } from 'react-router-dom';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import { CardActionArea, Divider } from '@mui/material';
 
 export default function OptionCard() {
     const responsive = {
@@ -22,176 +26,198 @@ export default function OptionCard() {
             slidesToSlide: 1 // optional, default to 1.
         }
     };
-    const slider1 = [
-        {
-            url:"https://rukminim2.flixcart.com/image/200/200/kokdci80/dslr-camera/v/e/x/z-24-200mm-z5-nikon-original-imag2zuekuxgxsgg.jpeg?q=70",
-            heading1: 'Top Mirrorless Camera',
-            heading2: 'Shop Now!',
-            heading3: 'Canon,Sony,Fujifilm',
-            top:'-9px'
-        },
-        {
-            url: "https://rukminim2.flixcart.com/image/200/200/xif0q/power-bank/d/a/f/-original-imagky3e8yp5ebvr.jpeg?q=70",
-            heading1: 'Premium PowerBanks',
-            heading2: 'Shop Now!',
-            heading3: 'Mi,realme & more',
-            top:'-9px',
-            left:'-14px'
-        },
-        {
-            url:"https://rukminim2.flixcart.com/flap/200/200/image/20c224cd52ae7a87.jpg?q=70",
-            heading1: 'Best of Trimmers',
-            heading2: 'Shop Now!',
-            heading3: 'Mi,realme & Philips',
-            top:'-9px'
-        },
-        {
-            url:"https://rukminim2.flixcart.com/image/200/200/printer/j/j/y/hp-laserjet-m1005-multifunction-original-imadxhzpeb9qbrfg.jpeg?q=70",
-            heading1: 'Printers',
-            heading2: 'From ₹3999',
-            heading3: 'HP',
-            top:'-9px',
-            right:'12px',
-            left:'-18px'
-        },
+    const [slider1, setMySlider1] = useState([])
+    const [slider2, setMySlider2] = useState([])
+    console.log(slider2)
+    const getallitemlist = async () => {
+        const response = await fetch('http://localhost:5000/api/cameraadd/allitemlist', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const json = await response.json()
+        const listvalues = Object.values(json)
+        setMySlider1(listvalues)
+    }
 
-        {
-            url:"https://m.media-amazon.com/images/I/41QoAqu6g4L._AC_SY200_.jpg",
-            heading1: 'Latest Smartphones',
-            heading2: 'From ₹10,999',
-            heading3: 'Buy Now',
-            top:'-9px',
-            left:'-18px'
-        }
-    ];
-    const slider2 = [
-        {
-            url:"https://rukminim2.flixcart.com/image/200/200/jp2xoy80/watch/c/j/8/38042pp04-fastrack-original-imafbet3f2y54u6s.jpeg?q=70",
-            heading1: 'Fastrack,Timex,Sonata',
-            heading2: 'From ₹499',
-            heading3: 'Rush To Grab The Best Offer!',
-            width:'8rem',
-            hieght:'10rem'
-        },
-        {
-            url: "https://rukminim2.flixcart.com/fk-p-flap/200/200/image/324eee4e5f645574.jpg?q=70",
-            heading1: 'Sparx,Bata & more',
-            heading2: 'From ₹149',
-            heading3: 'Trending Now!',
-            width:'12rem',
-            height:'14rem'
-        },
-        {
-            url:"https://rukminim2.flixcart.com/fk-p-flap/200/200/image/fa87460a6b15fec9.jpg?q=70",
-            heading1: "Kids' Ethnic Set",
-            heading2: 'Under ₹299',
-            heading3: 'Dhamaka Deals!',
-            width:'12rem',
-            height:'14rem'
-        },
-        {
-            url:"https://rukminim2.flixcart.com/image/200/200/kqjtd3k0/track-pant/4/w/k/32-a1212-0000-levi-s-original-imag4j4f8pjygzcm.jpeg?q=70",
-            heading1: 'Puma,ADIDAS,Reebok...',
-            heading2: 'UPTO 80% Off',
-            heading3: 'Trackpants,Shorts',
-            width:'12rem',
-            height:'14rem'
-        },
-        {
-            url:"https://rukminim2.flixcart.com/image/200/200/l4ei1e80/dress/s/r/y/m-16771386-dressberry-original-imagfbaeya8ceerp.jpeg?q=70",
-            heading1: 'Dressberry,Mast & Harbour...',
-            heading2: '50-80% Off',
-            heading3: "Women's Dresses & more",
-            width:'12rem',
-            height:'14rem'
-        }
-    ];
+    const getallfashionlist = async () => {
+        const response = await fetch('http://localhost:5000/api/fashionadd/allitemlist', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const json = await response.json()
+        const listvalues = Object.values(json)
+        let limit=listvalues[0].sort(() => Math.random() - 0.5).slice(0, 5)
+        setMySlider2(limit)
+    }
+    useEffect(() => {
+        getallitemlist()
+        getallfashionlist()
+        // eslint-disable-next-line
+    }, [])
     return (
         <>
-                       
-            <div className="d-flex mt-2 mb-2">
-            <div className="card overflow-x-scroll" style={{ width: "64rem", height: '23.4rem',  margin:"0 auto"}}>
-                    <div className="card-body d-flex">
-                    <div className="card text-center border-0" style={{ width: "14rem", height: '23rem', top: '-17px',right:'19px', backgroundImage: "URL('https://rukminim1.flixcart.com/fk-p-flap/278/278/image/7593e7b6640822c1.jpg?q=90')", backgroundPosition: "0px bottom", backgroundRepeat: "no-repeat" }}>
-                            <div className="card-body">
-                                <h5 className="card-title" id='card1' style={{ fontSize: "30px", lineHeight: "1.38", fontWeight: "400" }}>Best of Electronic</h5>
-                                <Link to='/electronic' className="btn btn-primary" style={{position:'relative',left:'21px'}}>View ALL</Link>
-                            </div>
-                        </div>
+            <div className="d-flex" style={{height:'24rem'}}>
+                <div className="card text-center border-0" style={{ width: "14rem", height: '23rem', backgroundImage: "URL('https://rukminim1.flixcart.com/fk-p-flap/278/278/image/7593e7b6640822c1.jpg?q=90')", backgroundPosition: "0px bottom", backgroundRepeat: "no-repeat", zIndex: 100000, left: "2px" }}>
+                    <div className="card-body">
+                        <h5 className="card-title" id='card1' style={{ fontSize: "30px", lineHeight: "1.38", fontWeight: "400" }}>Best of Electronic</h5>
+                        <Link to='/electronic' className="btn btn-primary" style={{ position: 'relative', left: '21px' }}>View ALL</Link>
+                    </div>
+                </div>
 
-                    <div style={{width:'50rem',position:'relative',right:'19px',top:'-2px' }}>
-                            <Carousel
-                                responsive={responsive}
-                                autoPlay={true}
-                                swipeable={true}
-                                draggable={true}
-                                infinite={true}
-                                partialVisible={false}
-                                removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
-                            >
-                                {slider1.map((imageUrl, index,key) => {
-                                    return (
-                                        <div className="card text-center border-0 " key={key} style={{ width: "15rem", height: '23.4rem', top: '-21px',cursor:'pointer' }}>
-                                            <div className="slider" key={index}>
-                                                <img src={imageUrl.url} alt="movie"className='card-img-top' style={{width:'8rem',hieght:'10rem',left:imageUrl.left}} />
-                                            </div>
-                                            <div className="card-body" style={{ top:imageUrl.top, position: "relative", right:imageUrl.right }}>
-                                                <p className="card-title" id='card-title'>{imageUrl.heading1}</p>
-                                                <p style={{ fontSize: '16px', color: "#388e3c" }}>{imageUrl.heading2}</p>
-                                                <p style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", opacity: ".6", fontSize: '14px', lineHeight: '1.4' }}>{imageUrl.heading3}</p>
-                                            </div>
+                <div style={{ width: '66.9rem' }}>
+                    <Carousel
+                        responsive={responsive}
+                        autoPlay={true}
+                        swipeable={true}
+                        draggable={true}
+                        infinite={true}
+                        partialVisible={false}
+                        style={{ width: "66rem" }}
+                        removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
+                    >
+                        {slider1.map((element, index, key) => {
+                            return (
+                                <Card sx={{ maxWidth: 300, maxHeight: 360 }} key={index} className='col-4 mx-1 my-2'>
+                                    {element.category === "Mobile" && <CardActionArea style={{ height: '15rem', display: 'flex' }}>
+                                        <CardMedia
+                                            component="img"
+                                            height="210"
+                                            image={element.image}
+                                            alt="green iguana"
+                                            className='img-thumbnail'
+                                            style={{ border: 'none', width: "10rem", height: "12.4rem" }}
+                                        />
+                                    </CardActionArea>}
+                                    {element.category === "Desktop PC" && <CardActionArea style={{ height: '15rem', display: 'flex' }}>
+                                        <CardMedia
+                                            component="img"
+                                            height="210"
+                                            image={element.image}
+                                            alt="green iguana"
+                                            className='img-thumbnail'
+                                            style={{ border: 'none', width: "14rem", height: "9.4rem" }}
+                                        />
+                                    </CardActionArea>}
+                                    {element.category === "Laptop" && <CardActionArea style={{ height: '15rem', display: 'flex' }}>
+                                        <CardMedia
+                                            component="img"
+                                            height="210"
+                                            image={element.image}
+                                            alt="green iguana"
+                                            className='img-thumbnail'
+                                            style={{ border: 'none', height: "9rem", width: '14rem' }}
+                                        />
+                                    </CardActionArea>}
+                                    {element.category === "Smartwatches" && <CardActionArea style={{ height: '15rem', display: 'flex' }}>
+                                        <CardMedia
+                                            component="img"
+                                            height="200"
+                                            image={element.image}
+                                            alt="green iguana"
+                                            className='img-thumbnail'
+                                            style={{ border: 'none', width: '12rem' }}
+                                        />
+                                    </CardActionArea>}
+                                    {element.category === "Printer" && <CardActionArea style={{ height: '15rem', display: 'flex' }}>
+                                        <CardMedia
+                                            component="img"
+                                            // height="10"
+                                            image={element.image}
+                                            alt="green iguana"
+                                            className='img-thumbnail'
+                                            style={{ border: 'none', height: "140px" }}
+                                        />
+                                    </CardActionArea>}
+                                    {element.category === "Headphones" && <CardActionArea style={{ height: '15rem', display: 'flex' }}>
+                                        <CardMedia
+                                            component="img"
+                                            height="145"
+                                            image={element.image}
+                                            alt="green iguana"
+                                            className='img-thumbail'
+                                            style={{ border: 'none', width: '9rem' }}
+                                        />
+                                    </CardActionArea>}
+                                    {element.category === "Trimmer" && <CardActionArea style={{ height: '15rem', display: 'flex' }}>
+                                        <CardMedia
+                                            component="img"
+                                            height="210"
+                                            image={element.image}
+                                            alt="green iguana"
+                                            className='img-thumbnail'
+                                            style={{ border: 'none' }}
+                                        />
+                                    </CardActionArea>}
+                                    <Divider />
+                                    <CardContent>
+                                        <div className="card-body text-center" style={{ position: "relative", top: '-40px' }}>
+                                            <p className="card-title" id='card-title'>{element.category}</p>
+                                            <p style={{ fontSize: '16px', color: "#388e3c" }}>{element.name}</p>
+                                            <p style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", opacity: ".6", fontSize: '14px', lineHeight: '1.4' }}>&#8377;{element.price}</p>
                                         </div>
-                                    );
-                                })}
-                            </Carousel>
-                        </div>
-                    </div>
-                </div>
-                <div style={{ position: 'relative', marginleft: '4px' }}>
-                    <div className="card" style={{ width: "14.56rem", height: '23.4rem' }}>
-                        <img src="https://rukminim2.flixcart.com/fk-p-flap/464/708/image/d133935e34408b02.jpg?q=70" alt="" style={{ width: '14rem', height: '23.4rem', position: "relative", left: "2px", margin: "2px" }} />
-                    </div>
+                                    </CardContent>
+                                </Card>
+                            );
+                        })}
+                    </Carousel>
                 </div>
             </div>
-            <div className="d-flex mt-2 mb-2">
-                <div className="card overflow-x-scroll" style={{ width: "79rem", height: '23.4rem',  margin:"0 auto"     }}>
-                    <div className="card-body d-flex">
-                        <div className="card text-center border-0" style={{ width: "17rem", height: '22.4rem', top: '-6px', right:'19px', backgroundImage: "url('https://rukminim1.flixcart.com/fk-p-flap/278/278/image/ae3cf1d27ef0eabc.jpg?q=90')", backgroundPosition: "0px bottom", backgroundRepeat: "no-repeat" }}>
-                            <div className="card-body"  >
-                                <h5 className="card-title" id='card1' style={{ fontSize: "30px", lineHeight: "1.38", fontWeight: "400" }}>Top Deal on Fashion</h5>
-                                <Link to='/fashionsection' className="btn btn-primary" style={{position:'relative',left:'27px'}}>View ALL</Link>
-                            </div>
-                        </div>
-                        <div  style={{position:"relative",right:"19px",width:'63.4rem' }}>
-                            <Carousel
-                                responsive={responsive}
-                                autoPlay={true}
-                                swipeable={true}
-                                draggable={true}
-                                infinite={true}
-                                partialVisible={false}
-                                removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
-                            >
-                                {slider2.map((imageUrl, index) => {
-                                    return (
-                                        <div className="card text-center border-0 "key={index} style={{ width: "17rem", height: '20rem', top: '-40px' }}>
-                                            <div className="slider" >
-                                                <img src={imageUrl.url} className='card-img-top' alt="movie" style={{width:imageUrl.width,hieght:imageUrl.height,left:'-4px'}} />
-                                            </div>
-                                            <div className="card-body" style={{ top:imageUrl.top, position: "relative", right: "-2px" }}>
-                                                <p className="card-title" id='card-title'>{imageUrl.heading1}</p>
-                                                <p style={{ fontSize: '16px', color: "#388e3c" }}>{imageUrl.heading2}</p>
-                                                <p style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", opacity: ".6", fontSize: '14px', lineHeight: '1.4' }}>{imageUrl.heading3}</p>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </Carousel>
-                        </div>
-                       
+            <div className="d-flex" style={{height:'24rem'}}>
+                <div className="card text-center border-0" style={{ width: "12.6rem", height: '23rem', backgroundImage: "url('https://rukminim1.flixcart.com/fk-p-flap/278/278/image/ae3cf1d27ef0eabc.jpg?q=90')", backgroundPosition: "0px bottom", backgroundRepeat: "no-repeat" ,zIndex:100000,left:'2px'}}>
+                    <div className="card-body"  >
+                        <h5 className="card-title" id='card1' style={{ fontSize: "30px", lineHeight: "1.38", fontWeight: "400" }}>Top Deal on Fashion</h5>
+                        <Link to='/fashionsection' className="btn btn-primary" style={{ position: 'relative', left: '27px' }}>View ALL</Link>
                     </div>
                 </div>
+                <div style={{width: '66.9rem' }}>
+                    <Carousel
+                        responsive={responsive}
+                        autoPlay={true}
+                        swipeable={true}
+                        draggable={true}
+                        infinite={true}
+                        partialVisible={false}
+                        removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
+                    >
+                        {slider2.map((element, index) => {
+                            if (element !== null) {
+                                return (
+                                    <Card sx={{ maxWidth:300, maxHeight: 360 }} key={index} className='col-4 mx-1 my-2'>
+                                        <CardActionArea style={{ height: '15rem', display: 'flex' }}>
+                                            <CardMedia
+                                                component="img"
+                                                height="210"
+                                                image={element.image}
+                                                alt="green iguana"
+                                                className='img-thumbnail'
+                                                style={{ border: 'none', width: '8.8rem' }}
+                                            />
+                                        </CardActionArea>
+                                        <Divider />
+                                        <CardContent>
+                                            <div className="card-body text-center" style={{ position: "relative", top: '-40px' }}>
+                                                <p className="card-title" id='card-title'>{element.itemtype}</p>
+                                                <p style={{ fontSize: '16px', color: "#388e3c" }}>{element.name?(element.name).slice(0, 10):"   "}</p>
+                                                <p style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", opacity: ".6", fontSize: '14px', lineHeight: '1.4' }}>&#8377;{element.price}</p>
+                                            </div>
+                                        </CardContent>
+                                    </Card>
+                                );
+                            }
+                            else{
+                                return null
+                            }
+                        })}
+                    </Carousel>
+                </div>
+
             </div>
+
+        
         </>
     )
 }

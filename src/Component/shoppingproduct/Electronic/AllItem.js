@@ -6,11 +6,10 @@ import Typography from '@mui/material/Typography';
 // import Rating from '@mui/material/Rating';
 import { Button, CardActionArea, CardActions, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import notfound from '../../images/item.avif'
-import { Link } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareSharpIcon from '@mui/icons-material/ShareSharp';
 import DoorPointApi from '../../../ComponentAPI/DoorPointAPI';
+import Notfound from '../Notfound';
 
 function AllItem() {
     const context = useContext(DoorPointApi)
@@ -18,7 +17,6 @@ function AllItem() {
     const { filterproducts, showAlert } = context
     const handleCart = () => {
         if (localStorage.getItem("token")) {
-            console.log("SSS")
         }
         else {
             history('/signin')
@@ -80,7 +78,6 @@ function AllItem() {
                                     </div>
                                 </Typography>
                             </CardContent>
-
                             <CardActions className='justify-content-between' style={{ position: 'sticky', top: '34.3rem' }}>
                                 <Button size="small" color="primary" onClick={handleCart}>
                                     Add to Cart
@@ -91,14 +88,7 @@ function AllItem() {
                             </CardActions>
                         </Card>
                     </div>
-                }) : <div style={{ margin: "0 auto" }}>
-                    <img src={notfound} alt="Not Found" style={{ width: '40rem', height: '20rem' }} />
-                    <div className="container mx-5">
-                        <h1 style={{ fontWeight: '100', fontSize: "100px" }}>Sorry</h1>
-                        <h5 style={{ fontWeight: '100', fontSize: '25px' }}>We Couldn't found the item</h5>
-                        <h6 style={{ fontWeight: '100', fontSize: '25px' }}>Try seraching or go to <Link to='/' style={{ textDecoration: 'none' }}>DoorPoint's Home Page</Link> </h6>
-                    </div>
-                </div>}
+                }) : <Notfound/>}
             </div>
     </>
   )
