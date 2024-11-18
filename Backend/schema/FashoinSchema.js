@@ -63,7 +63,7 @@ const fashionschema = new Schema({
     rating:{
         type:Number
     },
-    fieldsection:{
+    type:{
         type:String
     },
     sarilength:{

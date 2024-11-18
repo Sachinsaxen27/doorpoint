@@ -86,7 +86,7 @@ function AddFashion() {
     const handleforwho = (selectedgender) => {
         setMyforwho(selectedgender)
     }
-    const [fashiondetails, setmyFashiondetails] = useState({ name: "", itemid: "", brand: "", color: "", size: "", material: "", price: "", information: "", Footweartype: "", lifeshell: "", quantity: "", clothestype: '', watchstrap: '', watchshape: "", productarea: "", productpocket: "", productcardslot: "", jewelltype: "", plating: "", gemstone: "", clotheCategory: "", pattern: "", bagtype: "", grooming: "", idealfor: '', ptype: '', skintype: '', appiledfor: "", rating: '', sarilength: "", weight: "", fieldsection: "", neck: "", sleeve: "", bottomtype: "", inthebox: "", fit: '' })
+    const [fashiondetails, setmyFashiondetails] = useState({ name: "", itemid: "", brand: "", color: "", size: "", material: "", price: "", information: "", Footweartype: "", lifeshell: "", quantity: "", clothestype: '', watchstrap: '', watchshape: "", productarea: "", productpocket: "", productcardslot: "", jewelltype: "", plating: "", gemstone: "", pattern: "", bagtype: "", grooming: "", idealfor: '', ptype: '', skintype: '', appiledfor: "", rating: '', sarilength: "", weight: "", type: "", neck: "", sleeve: "", bottomtype: "", inthebox: "", fit: '' })
     const handlefashionsubmit = async (e) => {
         e.preventDefault()
         // const response = await fetch('http://localhost:5000/api/groomingadd/grooming', {
@@ -116,7 +116,7 @@ function AddFashion() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    name: fashiondetails.name, itemid: fashiondetails.itemid, brand: fashiondetails.brand, color: fashiondetails.color, size: fashiondetails.size, material: fashiondetails.material, gender: gender, price: fashiondetails.price, image: image, itemtype: fashion, information: fashiondetails.information, clothestype: fashiondetails.clothestype, forwho: forwho, clotheCategory: clotheCategory, pattern: fashiondetails.pattern, rating: fashiondetails.rating, sarilength: fashiondetails.sarilength, weight: fashiondetails.weight, fieldsection: fashiondetails.fieldsection, neck: fashiondetails.neck, sleeve: fashiondetails.sleeve, inthebox: fashiondetails.inthebox, bottomtype: fashiondetails.bottomtype, fit: fashiondetails.fit
+                    name: fashiondetails.name, itemid: fashiondetails.itemid, brand: fashiondetails.brand, color: fashiondetails.color, size: fashiondetails.size, material: fashiondetails.material, gender: gender, price: fashiondetails.price, image: image, itemtype: fashion, information: fashiondetails.information, clothestype: fashiondetails.clothestype, forwho: forwho, clotheCategory: clotheCategory, pattern: fashiondetails.pattern, rating: fashiondetails.rating, sarilength: fashiondetails.sarilength, weight: fashiondetails.weight, type: fashiondetails.type, neck: fashiondetails.neck, sleeve: fashiondetails.sleeve, inthebox: fashiondetails.inthebox, bottomtype: fashiondetails.bottomtype, fit: fashiondetails.fit
                 })
             });
             const json = await response.json()
@@ -208,35 +208,40 @@ function AddFashion() {
     };
     const [FitType, setMYFittype] = useState('')
     const [Necktype, setMyNeckType] = useState('')
-    const [Sleevetype, setMySleevetype] =useState('')
-    const[BottomsType,setMyBottomType]=useState('')
-
+    const [Sleevetype, setMySleevetype] = useState('')
+    const [BottomsType, setMyBottomType] = useState('')
     useEffect(() => {
-            if (clotheCategory === 'Jeans & Jeggings') {
-                setMyNeckType('Stretchable')
-                setMYFittype("Rise")
-                setMySleevetype("Faded")
-                setMyBottomType('Distressed')
-            }
-            else if (clotheCategory === 'Top and Tees') {
-                setMyNeckType('Collar')
-                setMYFittype("Fit")
-                setMyBottomType("Neck")
-                setMySleevetype('Sleeve')
-            }
-            else if (clotheCategory === 'Fit and Flare') {
-                setMyNeckType('Neck')
-                setMYFittype("Type")
-                setMyBottomType("Length")
-                setMySleevetype('Sleeve')
-            }
-            else {
-                setMyBottomType('Bottom Type')
-                setMyNeckType('Neck')
-                setMYFittype("Fit")
-                setMySleevetype('Sleeve')
-            }
-        }, [clotheCategory])
+        if (clotheCategory === 'Saree') {
+            setMyNeckType('Stretchable')
+            setMYFittype("Blouse Fabric")
+            setMySleevetype("Faded")
+            setMyBottomType('Blouse color')
+        }
+        else if (clotheCategory === 'Jeans & Jeggings') {
+            setMyNeckType('Stretchable')
+            setMYFittype("Rise")
+            setMySleevetype("Faded")
+            setMyBottomType('Distressed')
+        }
+        else if (clotheCategory === 'Top and Tees') {
+            setMyNeckType('Collar')
+            setMYFittype("Fit")
+            setMyBottomType("Neck")
+            setMySleevetype('Sleeve')
+        }
+        else if (clotheCategory === 'Fit and Flare') {
+            setMyNeckType('Neck')
+            setMYFittype("Type")
+            setMyBottomType("Length")
+            setMySleevetype('Sleeve')
+        }
+        else {
+            setMyBottomType('Bottom Type')
+            setMyNeckType('Neck')
+            setMYFittype("Fit")
+            setMySleevetype('Sleeve')
+        }
+    }, [clotheCategory])
     return (
         <>
             <div className="my-4">
@@ -480,7 +485,7 @@ function AddFashion() {
                                     </div>
                                     <div className='my-3' style={{ width: "15rem", position: 'relative', left: '49px' }}>
                                         <h6 style={{ fontSize: '13px' }}>Clothes Category:</h6>
-                                        <div className='mx-5 productlist' onClick={handleopenfashionlist2} style={{ position: 'relative', right: '39.7px' }} >
+                                        <div className='mx-5 productlist' onClick={handleopenfashionlist2} style={{ right: '47.7px' }} >
                                             <div className="col">
                                                 {clotheCategory}
                                             </div>
@@ -498,7 +503,7 @@ function AddFashion() {
                                                 <MenuItem onClick={() => handlefashionlist2('Kurta & Sets')} name='Kurta & Sets' value={'Kurta & Sets'}>Kurta & Sets</MenuItem>
                                             </li>
                                             <li>
-                                                <MenuItem onClick={() => handlefashionlist2("Sarees")} name="Sarees" value={"Sarees"}>Sarees</MenuItem>
+                                                <MenuItem onClick={() => handlefashionlist2("Saree")} name="Saree" value={"Saree"}>Saree</MenuItem>
                                             </li>
                                             <li>
                                                 <MenuItem onClick={() => handlefashionlist2("Winter Wear")} name="Winter Wear" value={"Winter Wear"}>Winter Wear</MenuItem>
@@ -507,7 +512,7 @@ function AddFashion() {
                                         </ul>
                                     </div>
                                 </div>
-                                {clotheCategory !== 'None' && <div className="d-flex justify-content-between">
+                                {(clotheCategory !== 'None' && clotheCategory !== 'Winter Wear') && <div className="d-flex justify-content-between">
                                     {<div className='my-3' style={{ width: "15rem", position: 'relative', left: '9px' }}>
                                         <h6 style={{ fontSize: '13px' }}>{BottomsType}:</h6>
                                         <input type="text" name="bottomtype" id="bottomtype" onChange={handlefashionChange} value={fashiondetails.bottomtype} required />
@@ -697,13 +702,13 @@ function AddFashion() {
                                 <div className="d-flex justify-content-between">
                                     <div className='my-3 ' style={{ width: "15rem", position: 'relative', left: '9px' }}>
                                         <h6 style={{ fontSize: '13px' }}>Belong to which Catergory:</h6>
-                                        <input type="text" name="fieldsection" id="fieldsection" value={fashiondetails.fieldsection} required placeholder='Only for owner' onChange={handlefashionChange} />
+                                        <input type="text" name="type" id="type" value={fashiondetails.type} required placeholder='Only for owner' onChange={handlefashionChange} />
                                     </div>
-                                    {(fashiondetails.clotheCategory).slice(0, 6) !== "Saree" && <div className='my-3' style={{ width: "15rem", position: 'relative', right: '8px' }}>
+                                    {clotheCategory !== "Saree" && <div className='my-3' style={{ width: "15rem", position: 'relative', right: '8px' }}>
                                         <h6 style={{ fontSize: '13px' }}>{Sleevetype}:</h6>
                                         <input type="text" name="sleeve" id="sleeve" onChange={handlefashionChange} value={fashiondetails.sleeve} required />
                                     </div>}
-                                    {(fashiondetails.clotheCategory).slice(0, 6) === "Saree" && <div className='my-3' style={{ width: "15rem", position: 'relative', left: '126px' }}>
+                                    {clotheCategory === "Saree" && <div className='my-3' style={{ width: "15rem", position: 'relative', right: '8px' }}>
                                         <h6 style={{ fontSize: '13px' }}>Saree length:</h6>
                                         <input type="number" name="sarilength" id="sarilength" onChange={handlefashionChange} value={fashiondetails.sarilength} required />
                                     </div>}
@@ -723,7 +728,7 @@ function AddFashion() {
                                         <h6 style={{ fontSize: '13px' }}>Wieght:</h6>
                                         <input type="number" name="weight" id="weight" onChange={handlefashionChange} value={fashiondetails.weight} required />
                                     </div>
-                                    {clotheCategory!=='Dresses'&&<div className='my-3' style={{ width: "15rem", position: 'relative', right: "8px" }}>
+                                    {clotheCategory !== 'Dresses' && <div className='my-3' style={{ width: "15rem", position: 'relative', right: "8px" }}>
                                         <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>In the Box:</h6>
                                         <textarea name="inthebox" id="inthebox" cols="30" rows="1" value={fashiondetails.inthebox} onChange={handlefashionChange} required></textarea>
                                     </div>}

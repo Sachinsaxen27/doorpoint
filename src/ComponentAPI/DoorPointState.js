@@ -21,8 +21,10 @@ function DoorPointState(props) {
       },
     });
     const json = await response.json()
-    console.log(json)
-    setMyinfo(json)
+    // console.log(json)
+    if (json) {
+      setMyinfo(json)
+    }
   }
   // FOR PRESENTING ALL ELECTRONIC ITEM
   const [products, setMyproduct] = useState([])
@@ -117,21 +119,27 @@ function DoorPointState(props) {
     // eslint-disable-next-line 
   }, [filterCamera, productfilter, filteroption])
   const Add_Cart = async (element, quantity) => {
-    const response = await fetch('http://localhost:5000/api/addcart/carts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'auth-token': localStorage.getItem('token')
-      },
-      body: JSON.stringify({ element, quantity: quantity })
-    });
-    if (response.ok) {
-      getcart()
-    } else {
-      showAlert("Already Exist", 'danger')
+    if (localStorage.token) {
+      const response = await fetch('http://localhost:5000/api/addcart/carts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': localStorage.getItem('token')
+        },
+        body: JSON.stringify({ element, quantity: quantity })
+      });
+      if (response.ok) {
+        getcart()
+      } else {
+        showAlert("Already Exist", 'danger')
+      }
+    }
+    else {
+      showAlert("Login first for adding in cart", 'danger')
     }
   }
-  const [cartlen, setMycartlen] = useState()
+  const [cartlen, setMycartlen] = useState(0)
+  const [Mycart_list, setMyCart_List] = useState('')
   const getcart = async () => {
     const response = await fetch('http://localhost:5000/api/addcart/getcart', {
       method: "GET",
@@ -143,8 +151,47 @@ function DoorPointState(props) {
     if (response.ok) {
       const json = await response.json()
       setMycartlen(json.getcart)
+      setMyCart_List(json.getcart)
     } else {
       setMycartlen(0)
+    }
+  }
+  const clearCartitem = async (id) => {
+    const response = await fetch(`http://localhost:5000/api/addcart/deleteAllItem/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    const json = await response.json()
+    // console.log(json)
+    if (json) {
+      setMycartlen(0)
+      // console.log("success", json)
+      // console.log('success')
+    }
+    else {
+      console.log("unsuccess")
+      showAlert("Item is already not available in the cart", 'danger')
+    }
+  }
+  const DeletItem = async (id) => {
+    // console.log(id)
+    const response = await fetch(`http://localhost:5000/api/addcart/deleteitem/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      },
+    })
+    const json = await response.json()
+    // console.log(json)
+    if (json) {
+      console.log(json.success)
+      getcart()
+      showAlert("Item deleted from the cart", 'success')
+    }
+    else {
+      console.log("Item is already available in the cart", 'danger')
     }
   }
   useEffect(() => {
@@ -159,7 +206,7 @@ function DoorPointState(props) {
   const [locationname, setLocationName] = useState({ loca: "Hello", load: "Select Your address" })
   const [postcode, setMypostcode] = useState()
   const getlatitude = (lat, long) => {
-    console.log('enter', lat, long)
+    // console.log('enter', lat, long)
     setMyposition({ lat: lat, long: long })
   }
   useEffect(() => {
@@ -172,16 +219,32 @@ function DoorPointState(props) {
     try {
       const response = await axios.get(`https://nominatim.openstreetmap.org/reverse?lat=${position.lat}&lon=${position.long}&format=json`);
       setLocationName({ loca: "Delivering at " + response.data.address.city, load: "Updated Location" });
-      // console.log(response)
-      console.log(response.data)
+      // console.log(response.data)
       setMypostcode(response.data.address.postcode)
     } catch (error) {
       console.error('Error fetching location:', error);
     }
   }
+  let date = new Date()
+  date.setDate(date.getDate() + 1);
+  let montharr = ['January', "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  let Daysarr = ["Sunday", "Monday", "Tuesday", 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const [numberDate, setMyNumber] = useState()
+  useEffect(() => {
+    let n = Math.floor(Math.random() * 10) + 1
+    if (n === 0 || n === 1 || n === 10) {
+      setMyNumber(2)
+    }
+    else {
+      setMyNumber(n)
+    }
+    return () => clearTimeout(n)
+  }, [])
+  let currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + numberDate);
   return (
     <>
-      <DoorPointApi.Provider value={{ getinfo, getcart, alert, locationname, getlatitude, showAlert, postcode, info, cameralist, showFliter, cartlen, Add_Cart, filterlist, filterCamera, products, handlefilter, productlist, productfilter, filteritem, filterproducts }}>
+      <DoorPointApi.Provider value={{clearCartitem, Mycart_list, currentDate, Daysarr, montharr, getinfo, getcart, alert, locationname, getlatitude, showAlert, postcode, info, cameralist, showFliter, cartlen, Add_Cart, filterlist, filterCamera, products, handlefilter, productlist, productfilter, filteritem, filterproducts, DeletItem }}>
         {props.children}
       </DoorPointApi.Provider>
     </>

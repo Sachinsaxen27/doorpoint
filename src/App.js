@@ -21,6 +21,9 @@ import Groomingitem from './Component/shoppingproduct/Fashion/Groomingitem';
 import Groom1 from './Component/shoppingproduct/Fashion/Groom1';
 import CartList from './Component/shoppingproduct/CartList';
 import ItemViewPage from './Component/shoppingproduct/ItemViewPage';
+import Buypage from './Component/shoppingproduct/Fashion/Buypage';
+import Profile from './Component/Profile/Profile';
+import Ordercomfrimpage from './Component/shoppingproduct/Ordercomfrimpage';
 function App() {
   const [loader, setmyloader] = useState(true)
   const [Store, setmyStore] = useState(false)
@@ -52,6 +55,9 @@ function App() {
               <Route exxact path='/skin' element={<Groom1/>}></Route>
               <Route exxact path='/cartpage' element={<CartList/>}></Route>
               <Route exxact path='/itemview' element={<ItemViewPage/>}></Route>
+              <Route exxact path='/buypage' element={<Buypage/>}></Route>
+              <Route exxact path='/profile' element={<Profile/>}></Route>
+              <Route exxact path='/comfirm' element={<Ordercomfrimpage/>}></Route>
           </Routes>}
         </Router>
       </DoorPointState>

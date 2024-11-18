@@ -21,16 +21,18 @@ import installation from '../images/toolbox-repairing-icon.png'
 import dpdelivery from '../images/dp.svg'
 import Divider from '@mui/material/Divider';
 import FashionPreview from './ProductView/FashionPreview';
+import { useNavigate } from 'react-router-dom';
 // import indiaPincodeSearch from 'india-pincode-search';
 function ItemViewPage() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { AddItem, RemoveItem } = bindActionCreators(actioncart, dispatch)
     const quantity = useSelector(state => state.carts)
-    const data=useSelector(state=>state.items)
+    const data = useSelector(state => state.items)
     const context = useContext(DoorPointApi)
-    const { locationname, postcode, getcart, showAlert } = context
+    const { locationname, postcode, getcart, showAlert, Add_Cart, Buy_items } = context
     const [numberDate, setMyNumber] = useState()
-    const {ViewItem} = bindActionCreators(actioncart, dispatch)
+    // const {ViewItem} = bindActionCreators(actioncart, dispatch)
     useEffect(() => {
         let n = Math.floor(Math.random() * 10) + 1
         if (n === 0 || n === 1 || n === 10) {
@@ -41,7 +43,7 @@ function ItemViewPage() {
         }
         return () => clearTimeout(n)
     }, [])
-    
+
     const [imagenumber, setMyimageNumber] = useState(0)
     let date = new Date()
     date.setDate(date.getDate() + 1);
@@ -52,30 +54,9 @@ function ItemViewPage() {
     let money = data.price
     const formatter = new Intl.NumberFormat('en-US');
     money = formatter.format(money)
-    const Add_Cart = async (element, quantity) => {
-        if (localStorage.token) {
-            const response = await fetch('http://localhost:5000/api/addcart/carts', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'auth-token': localStorage.getItem('token')
-                },
-                body: JSON.stringify({ element, quantity: quantity })
-            });
-            if (response.ok) {
-                getcart()
-            } else {
-                updateCart(element)
-            }
-        }
-        else {
-            showAlert("Please Loign First", 'warning')
-        }
-    }
     const updateCart = async (element) => {
         // /updatecart/:id
         if (localStorage.token) {
-
             const response = await fetch(`http://localhost:5000/api/addcart/updatecart/${element._id}`, {
                 method: "PUT",
                 headers: {
@@ -89,7 +70,7 @@ function ItemViewPage() {
                 getcart()
             }
         } else {
-            showAlert("Please Login First", 'warning')
+            showAlert("Please login first to add item in cart", 'warning')
         }
     }
     const [scrollPosition, setScrollPosition] = useState(0);
@@ -104,7 +85,7 @@ function ItemViewPage() {
     const [readstate, setMyReadstate] = useState("Read More")
     const [areatext, setMyareatext] = useState(200)
     const fulldetails = () => {
-        const textarea = document.getElementById('fulldetails')
+        // const textarea = document.getElementById('fulldetails')
         if (areatext === 200) {
             // textarea.style.height = 'fit-content'
             setMyareatext((data.information.length))
@@ -116,22 +97,35 @@ function ItemViewPage() {
             setMyReadstate("Read More")
         }
     }
+    const Buy_item = (element) => {
+        Buy_items.push(element)
+        if (localStorage.token) {
+            navigate('/buypage', { state: { value: element } })
+            //   console.log(element)
+            showAlert('Buying items', 'primary')
+        }
+        else {
+            showAlert('Login first for buying items', 'warning')
+        }
+    }
+    console.log(data)
     return (
         <>
             <div className=' my-5 itemview'>
                 <div className="row">
                     <div className="col-4" style={{ display: "flex", alignItems: 'center', marginTop: '15px' }}>
-                        <div className='image_group'>
-                            {(data.clotheCategory).slice(0, 6) === "Winter" && (data.image.length > 1 ? data.image?.map((element, index) => {
+                        {data.itemtype === 'Clothes' && <div className='image_group'>
+                            {(data.clotheCategory).slice(0, 6) === "Winter" && (Array.isArray(data.image) ? data.image?.map((element, index) => {
                                 return <img src={element.data} alt="" style={{ height: '61px', cursor: 'pointer', width: "36px" }} className='my-1 mx-1' onClick={() => setMyimageNumber(index)} key={index} />
                             }) : <img src={data.image} alt="" style={{ height: '3rem', cursor: 'pointer' }} className='my-1 mx-1' />)}
-                            {(data.clotheCategory).slice(0, 6) !== "Winter" && (data.image.length > 1 ? data.image?.map((element, index) => {
+                            {(data.clotheCategory).slice(0, 6) !== "Winter" && (Array.isArray(data.image) ? data.image?.map((element, index) => {
                                 return <img src={element.data} alt="" style={{ height: '3rem', cursor: 'pointer', width: "40px" }} className='my-1 mx-1' onClick={() => setMyimageNumber(index)} key={index} />
                             }) : <img src={data.image} alt="" style={{ height: '3rem', cursor: 'pointer' }} className='my-1 mx-1' />)}
-                        </div>
-                        {data.image.length <= 1 ? <div className='big_image' style={{ margin: "0px auto" }}><img src={data.image} alt="" className='img-fluid ' style={{ width: "24rem", height: "32rem" }} /> </div> : <div className='big_image' style={{ margin: "0px auto" }}> <img src={data.image[imagenumber].data} alt="" className='img-fluid' style={{ height: '32rem', width: 'fit-content' }} /></div>}
+                        </div>}
+                        {Array.isArray(data.image) ? <div className='big_image' style={{ margin: "0px auto" }}><img src={data.image[imagenumber].data} alt="" className='img-fluid' style={{ height: '32rem', width: 'fit-content' }} /></div> : <div className='big_image' style={{ margin: "0px auto" }}><img src={data.image} alt="" className='img-fluid' style={{ width: "24rem", height: "32rem" }} /></div>}
+                        {data.itemtype==="Grooming"&&data.image.length>1 && <div className='big_image' style={{ margin: "0px auto" }}><img src={data.image[imagenumber].data} alt="" className='img-fluid' style={{ height: '32rem', width: 'fit-content' }} /></div>}
                     </div>
-                    <div className="col-6 mx-3" style={{ marginTop: '15px',right:"27px" }}>
+                    <div className="col-6 mx-3" style={{ marginTop: '15px', right: "27px" }}>
                         <h3> {data.name}</h3>
                         <div className='ratingprice'>
                             <h2><span className='tag'>₹</span>{money}</h2><span style={{ display: 'flex' }}><Rating name="half-rating" defaultValue={data.rating} precision={0.5} readOnly /><span className='mx-2 itemgroup_2'>Rating</span></span>
@@ -145,7 +139,7 @@ function ItemViewPage() {
                         <div className='cartbutton my-2'>
                             <div className='cartbutton_1 my-2 mx-2'>
                                 <span className='quantity_1'>Quantity{quantity <= 1 ? <RemoveCircleOutlineIcon className='mx-1' /> : <RemoveCircleOutlineIcon className='mx-1' onClick={() => RemoveItem(1)} />} <input type="text" name="quantity" id="quantity" readOnly value={quantity} className='quantityinput' /> <ControlPointIcon className='mx-1' onClick={() => AddItem(1)} /></span>
-                                <span className='button_group'><button type="button" className="btn btn-primary text-center mx-1" onClick={() => Add_Cart(data, quantity)}>Add to Cart</button><button type="button" className="btn btn-primary mx-1 text-center">Buy Now</button></span>
+                                <span className='button_group'><button type="button" className="btn btn-primary text-center mx-1" onClick={() => Add_Cart(data, quantity)}>Add to Cart</button><button onClick={() => { Buy_item(data) }} type="button" className="btn btn-primary mx-1 text-center">Buy Now</button></span>
                             </div>
                             <span className='wishlist'><button type="button" className="btn btn-danger mx-1 text-center">Add to Wishlist<FavoriteIcon className='mx-1' /></button></span>
                         </div>
@@ -241,7 +235,7 @@ function ItemViewPage() {
                             </div>
                         </div>
                     </li>
-                    <li className="list-group-item">
+                    {data.color&&<li className="list-group-item">
                         <div className="row justify-content-between">
                             <div className="col-3">
                                 Color
@@ -250,8 +244,8 @@ function ItemViewPage() {
                                 {data.color}
                             </div>
                         </div>
-                    </li>
-                    <li className="list-group-item">
+                    </li>}
+                    {data.size&&<li className="list-group-item">
                         <div className="row justify-content-between">
                             <div className="col-3">
                                 Size
@@ -260,17 +254,15 @@ function ItemViewPage() {
                                 {data.size}
                             </div>
                         </div>
-                    </li>
-                    {data.itemtype === 'Clothes' &&
-                        <FashionPreview/>
-                    }
+                    </li>}
+                    <FashionPreview />
                     {data.information !== "N/A" && <div className="row mx-2 information1">
                         <div className="text-start ">
                             About this Item:
                         </div>
                         <div className='entryinformation' id='fulldetails' >
                             {(data.information).slice(0, areatext)}
-                            {(data.information).length>=areatext&&<span style={{cursor:"pointer"}} onClick={fulldetails}>...{readstate}</span>}
+                            {(data.information).length >= areatext && <span style={{ cursor: "pointer" }} onClick={fulldetails}>...{readstate}</span>}
                         </div>
                     </div>}
                 </ul>

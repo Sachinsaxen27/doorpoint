@@ -197,7 +197,8 @@ router.get('/getrefri',async(req,res)=>{
 })
 //ROUTER 8 FOR GET ALL ITEM LIST
 router.get('/getallitem',async(req,res)=>{
-    
+    const refrilist=await RefrigeratorSchema.find({},{applianceid:1,name:2,appliancetype:1,appliancecate:1,company:1,refrigeratortype:1,defrostingtype:1,compressortype:1,capacity:1,numberdoor:1,coolpad:1,toughenedglass:1,stabilizer:1,image:1,price:1,details:1,color:1,wieght:1,fieldsection:1})
+    res.status(200).json(refrilist.length )
 })
 
 module.exports = router

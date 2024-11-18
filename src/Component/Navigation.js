@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AddProductbutton from './AddProductbutton'
 import './Style.css'
 import Door from './images/doorpoints.png'
@@ -22,8 +22,18 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 export default function Navigation() {  
   const context = useContext(DoorPointApi)
   const { showAlert, info, cartlen,locationname,getlatitude} = context
-  // console.log(name)
+  // console.log(locationname)
+  const[names,setMyName]=useState('')
   const locate = useLocation()
+  useEffect(()=>{
+    if(info.name){
+      setMyName(info.name)
+    }
+    else{
+      // console.log(info.name)
+      setMyName('')
+    }
+  },[info])
   useEffect(() => {
     if (locate.pathname === '/signin') {
       document.body.style.backgroundColor = 'lavender'
@@ -62,14 +72,13 @@ export default function Navigation() {
     const lis = document.getElementById('lis1')
     lis.style.display = 'none'
   }
-  let i=0
   const handloc=()=>{
-    console.log(i+1)
     if ('geolocation' in navigator) {
       
       (navigator.geolocation.getCurrentPosition(function (position) {
         let lat = position.coords.latitude;
         let long = position.coords.longitude;
+        console.log(lat,long)
         getlatitude(lat, long)
       }))
     }
@@ -124,8 +133,8 @@ export default function Navigation() {
                 </span>
               </li>
               {(locate.pathname !== '/signin') && <li style={{ position: 'relative', left: "13px", top: '2px' }} onMouseEnter={handleclicks} >
-                {localStorage.token === undefined ? <button className=' btn-primary' ><Link to='/signin' style={{ position: 'relative', top: "-2px", display: 'flex', justifyContent: 'center', textDecoration: "none", color: 'white' }}>Sign In</Link>
-                </button> : <button className='btn-primary' style={{ width: 'fit-content' }}><span>&nbsp;{info.name}&nbsp;</span>
+                {(localStorage.token === undefined && info.name===undefined) ? <button className=' btn-primary' ><Link to='/signin' style={{ position: 'relative', top: "-2px", display: 'flex', justifyContent: 'center', textDecoration: "none", color: 'white' }}>Sign In</Link>
+                </button> : <button className='btn-primary' style={{ width: 'fit-content' }}><span>&nbsp;{names}&nbsp;</span>
                 </button>}
               </li>}
               <ul id='lis1' style={{ listStyle: "none", backgroundColor: 'white', height: "13rem", borderRadius: '6px', cursor: "pointer", display: 'none', position: 'fixed', top: "49px", width: '14rem', right: '95px' }} onMouseLeave={handleclose}>
@@ -140,7 +149,7 @@ export default function Navigation() {
                   </div>}
                 </li>
                 <li className='list-nav'>
-                  <PersonOutlineIcon /><span style={{ fontSize: '15px', marginLeft: '13px', marginTop: '1px' }}>Profile</span>
+                  <PersonOutlineIcon /><Link style={{ fontSize: '15px', marginLeft: '13px', marginTop: '1px',color:'black',textDecoration:'none'}} to='/profile'>Profile</Link>
                 </li>
                 <li className='list-nav' >
                   <img src={point} alt="Point" style={{ width: '24px' }} /> <span style={{ fontSize: '15px', marginLeft: '13px', marginTop: '1px' }}>

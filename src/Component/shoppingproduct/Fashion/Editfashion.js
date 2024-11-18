@@ -10,7 +10,7 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import DoorPointApi from '../../../ComponentAPI/DoorPointAPI';
+import DoorPointApi from '../../../ComponentAPI/DoorPointAPI';  
 
 
 const steps = ['Basic Info', 'Specifaction', 'Details'];
@@ -18,7 +18,59 @@ const steps = ['Basic Info', 'Specifaction', 'Details'];
 function Editfashion(props) {
     const { element } = props
     console.log(element)
-    const [fashiondetails, setmyFashiondetails] = useState({ name: "", itemid: "", brand: "", color: "", size: "", material: "", price: "", information: "", Footweartype: "", lifeshell: "", quantity: "", clothestype: '', watchstrap: '', watchshape: "", productarea: "", productpocket: "", productcardslot: "", jewelltype: "", plating: "", gemstone: "", clotheCategory: "", pattern: "", bagtype: "", grooming: "", idealfor: '', ptype: '', skintype: '', appiledfor: "" })
+    const [FitType, setMYFittype] = useState('')
+    const [Necktype, setMyNeckType] = useState('')
+    const [Sleevetype, setMySleevetype] = useState('')
+    const [BottomsType, setMyBottomType] = useState('')
+    const [clotheCategory, setMyClothesCategory] = useState("None")
+    const handlefashionlist2 = (value) => {
+        setMyClothesCategory(value)
+    }
+    const handleopenfashionlist2 = () => {
+        const companylist = document.getElementById('fashionlist_2')
+        if (companylist.style.display === 'none') {
+            companylist.style.display = 'block'
+        }
+    }
+    const handleClosefashionlist2 = () => {
+        const companylist1 = document.getElementById('fashionlist_2')
+        if (companylist1.style.display === 'block') {
+            companylist1.style.display = 'none'
+        }
+    }
+    useEffect(() => {
+        if (clotheCategory === 'Saree') {
+            setMyNeckType('Stretchable')
+            setMYFittype("Blouse Fabric")
+            setMySleevetype("Faded")
+            setMyBottomType('Blouse color')
+        }
+        else if (clotheCategory === 'Jeans & Jeggings') {
+            setMyNeckType('Stretchable')
+            setMYFittype("Rise")
+            setMySleevetype("Faded")
+            setMyBottomType('Distressed')
+        }
+        else if (clotheCategory === 'Top and Tees') {
+            setMyNeckType('Collar')
+            setMYFittype("Fit")
+            setMyBottomType("Neck")
+            setMySleevetype('Sleeve')
+        }
+        else if (clotheCategory === 'Fit and Flare') {
+            setMyNeckType('Neck')
+            setMYFittype("Type")
+            setMyBottomType("Length")
+            setMySleevetype('Sleeve')
+        }
+        else {
+            setMyBottomType('Bottom Type')
+            setMyNeckType('Neck')
+            setMYFittype("Fit")
+            setMySleevetype('Sleeve')
+        }
+    }, [clotheCategory])
+    const [fashiondetails, setmyFashiondetails] = useState({ name: "", itemid: "", brand: "", color: "", size: "", material: "", price: "", information: "", Footweartype: "", lifeshell: "", quantity: "", clothestype: '', watchstrap: '', watchshape: "", productarea: "", productpocket: "", productcardslot: "", jewelltype: "", plating: "", gemstone: "", pattern: "", bagtype: "", grooming: "", idealfor: '', ptype: '', skintype: '', appiledfor: "", rating: '', sarilength: "", weight: "", type: "", neck: "", sleeve: "", bottomtype: "", inthebox: "", fit: '' })
     useEffect(() => {
         if (element.itemtype === 'Clothes') {
             setmyFashiondetails({
@@ -31,14 +83,25 @@ function Editfashion(props) {
                 price: element.price || '',
                 information: element.information || '',
                 clothestype: element.clothestype || '',
-                clotheCategory: element.clotheCategory || '',
-                pattern: element.pattern || ""
+                pattern: element.pattern || "",
+                rating: element.rating || "",
+                sleeve: element.sleeve || "",
+                weight: element.weight || '',
+                fit:element.fit||'',
+                type:element.type||'',
+                bottomtype:element.bottomtype||'',
+                inthebox:element.inthebox||"",
+                neck:element.neck||'',
+                sarilength:element.sarilength||""
             })
+            setMyNeckType(element.neck || '')
+            setMyClothesCategory(element.clotheCategory || '')
             setMyforwho(element.forwho || '')
             setMygender(element.gender || '')
             setMyfashion(element.itemtype || '')
         } else if (element.itemtype === 'Accessories') {
-            setmyFashiondetails({itemid: element.itemid || '',name: element.name || '',brand: element.brand || "",color: element.color || '',price: element.price || '',information: element.information || '',material: element.material || '',productarea: element.productarea || '',productpocket: element.productpocket || '',productcardslot: element.productcardslot || '',jewelltype: element.jewelltype || '',plating: element.plating || '',gemstone: element.gemstone || "",bagtype: element.bagtype || ''
+            setmyFashiondetails({
+                itemid: element.itemid || '', name: element.name || '', brand: element.brand || "", color: element.color || '', price: element.price || '', information: element.information || '', material: element.material || '', productarea: element.productarea || '', productpocket: element.productpocket || '', productcardslot: element.productcardslot || '', jewelltype: element.jewelltype || '', plating: element.plating || '', gemstone: element.gemstone || "", bagtype: element.bagtype || ''
             })
             setMyproducttype(element.producttype || "")
             setMyforwho(element.forwho || '')
@@ -46,18 +109,18 @@ function Editfashion(props) {
             setMyfashion(element.itemtype || '')
         } else if (element.itemtype === "Grooming") {
             setmyFashiondetails({
-                itemid:element.itemid||'',
-                name: element.name||"",
-                brand:element.brand||"",
-                grooming: element.groomingtype||'',
-                lifeshell:element.lifeshell||"",
-                quantity:element.quantity||"",
-                price: element.price||"",
-                information:element.information||'',
-                idealfor:element.idealfor||"",
-                ptype: element.ptype||'',
-                skintype: element.skintype||'',
-                appiledfor:element.appiledfor||''
+                itemid: element.itemid || '',
+                name: element.name || "",
+                brand: element.brand || "",
+                grooming: element.groomingtype || '',
+                lifeshell: element.lifeshell || "",
+                quantity: element.quantity || "",
+                price: element.price || "",
+                information: element.information || '',
+                idealfor: element.idealfor || "",
+                ptype: element.ptype || '',
+                skintype: element.skintype || '',
+                appiledfor: element.appiledfor || ''
             })
             setMyfashion(element.itemtype || '')
             setMygender(element.gender || '')
@@ -142,7 +205,7 @@ function Editfashion(props) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    name: fashiondetails.name, itemid: fashiondetails.itemid, brand: fashiondetails.brand, color: fashiondetails.color, size: fashiondetails.size, material: fashiondetails.material, gender: gender, price: fashiondetails.price, image: image, itemtype: fashion, information: fashiondetails.information, clothestype: fashiondetails.clothestype, forwho: forwho, clotheCategory: fashiondetails.clotheCategory, pattern: fashiondetails.pattern
+                    name: fashiondetails.name, itemid: fashiondetails.itemid, brand: fashiondetails.brand, color: fashiondetails.color, size: fashiondetails.size, material: fashiondetails.material, gender: gender, price: fashiondetails.price, image: image, itemtype: fashion, information: fashiondetails.information, clothestype: fashiondetails.clothestype, forwho: forwho, clotheCategory: clotheCategory, pattern: fashiondetails.pattern, rating: fashiondetails.rating, sarilength: fashiondetails.sarilength, weight: fashiondetails.weight, type: fashiondetails.type, neck: fashiondetails.neck, sleeve: fashiondetails.sleeve, inthebox: fashiondetails.inthebox, bottomtype: fashiondetails.bottomtype, fit: fashiondetails.fit
                 })
             });
             const json = await response.json()
@@ -456,6 +519,16 @@ function Editfashion(props) {
                                             </div>
                                         </div>
                                         <div className="d-flex justify-content-between">
+                                            <div className='my-3' style={{ width: "15rem", position: 'relative', right: '1px' }}>
+                                                <h6 style={{ fontSize: '13px', position: 'relative', left: '9px' }}>Pattern:</h6>
+                                                <input type="text" name="pattern" id="pattern" className='mx-5' onChange={handlefashionChange} value={fashiondetails.pattern} style={{ position: 'relative', right: "38px" }} required />
+                                            </div>
+                                            <div className='my-3' style={{ width: "15rem", position: 'relative' }}>
+                                                <h6 style={{ fontSize: '13px', position: 'relative', left: '3rem' }}>Brand:</h6>
+                                                <input type="text" name="brand" id="brand" className='mx-5' onChange={handlefashionChange} value={fashiondetails.brand} style={{ position: 'relative', left: '1px' }} required />
+                                            </div>
+                                        </div>
+                                        <div className="d-flex justify-content-between">
                                             <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
                                                 <h6 style={{ fontSize: '13px', position: 'relative', left: '51px' }}>Color:</h6>
                                                 <input type="text" name="color" id="color" className='mx-5' onChange={handlefashionChange} value={fashiondetails.color} style={{ position: "relative", left: '4px' }} required />
@@ -479,26 +552,50 @@ function Editfashion(props) {
                                             <div className='my-3' style={{ position: "relative", left: "9px" }}>
                                                 <h6 style={{ fontSize: '13px', position: 'relative' }}>For Who:</h6>
                                                 <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" style={{ position: 'relative' }}>
-                                                    <FormControlLabel value='Women' name='Women' control={<Radio />} onClick={() => handleforwho('Women')} label="Women" checked={forwho === 'Women'} />
-                                                    <FormControlLabel value="Men" onClick={() => handleforwho('Men')} name='Men' control={<Radio />} label="Men" checked={forwho === 'Men'} />
-                                                    <FormControlLabel value="Kid" onClick={() => handleforwho('Kid')} name='Kid' control={<Radio />} label="Kid" checked={forwho === 'Kid'} />
+                                                    <FormControlLabel value='Women' name='Women' control={<Radio />} onClick={() => handleforwho('Women')} label="Women" />
+                                                    <FormControlLabel value="Men" onClick={() => handleforwho('Men')} name='Men' control={<Radio />} label="Men" />
+                                                    <FormControlLabel value="Kid" onClick={() => handleforwho('Kid')} name='Kid' control={<Radio />} label="Kid" />
                                                 </RadioGroup>
                                             </div>
-                                            <div className='my-3' style={{ width: "15rem", position: 'relative', right: '3px' }}>
-                                                <h6 style={{ fontSize: '13px', position: 'relative', left: '51px' }}>Clothes Category:</h6>
-                                                <input type="text" name="clotheCategory" id="clotheCategory" className='mx-5' onChange={handlefashionChange} value={fashiondetails.clotheCategory} style={{ position: 'relative', left: '4px  ' }} required />
+                                            <div className='my-3' style={{ width: "15rem", position: 'relative', left: '49px' }}>
+                                                <h6 style={{ fontSize: '13px' }}>Clothes Category:</h6>
+                                                <div className='mx-5 productlist' onClick={handleopenfashionlist2} style={{ right: '47.7px' }} >
+                                                    <div className="col">
+                                                        {clotheCategory}
+                                                    </div>
+                                                    <div className='col' style={{ display: 'flex', alignItems: 'center', position: 'absolute', left: '4rem', justifyContent: 'center' }}>   <ArrowDropDownIcon />
+                                                    </div>
+                                                </div>
+                                                <ul id='fashionlist_2' style={{ listStyle: 'none', width: '11rem', height: '9rem', backgroundColor: '#fff', overflowY: 'scroll', borderRadius: "5px", border: '1px solid #ccc', display: "none", position: 'absolute', left: '8px', zIndex: '10000' }} onMouseLeave={handleClosefashionlist2} required >
+                                                    <li>
+                                                        <MenuItem onClick={() => handlefashionlist2("Fit and Flare")} name="Dresses" value={"Dresses"}>Dresses</MenuItem>
+                                                    </li>
+                                                    <li>
+                                                        <MenuItem onClick={() => handlefashionlist2("Jeans")} name="Jeans & Jeggings" value={"Jeans & Jeggings"}>Jeans & Jeggings</MenuItem>
+                                                    </li>
+                                                    <li>
+                                                        <MenuItem onClick={() => handlefashionlist2('Kurta & Sets')} name='Kurta & Sets' value={'Kurta & Sets'}>Kurta & Sets</MenuItem>
+                                                    </li>
+                                                    <li>
+                                                        <MenuItem onClick={() => handlefashionlist2("Saree")} name="Saree" value={"Saree"}>Saree</MenuItem>
+                                                    </li>
+                                                    <li>
+                                                        <MenuItem onClick={() => handlefashionlist2("Winter Wear")} name="Winter Wear" value={"Winter Wear"}>Winter Wear</MenuItem>
+                                                    </li>
+
+                                                </ul>
                                             </div>
                                         </div>
-                                        <div className="d-flex justify-content-between">
-                                            <div className='my-3' style={{ width: "15rem", position: 'relative', right: '1px' }}>
-                                                <h6 style={{ fontSize: '13px', position: 'relative', left: '9px' }}>Pattern:</h6>
-                                                <input type="text" name="pattern" id="pattern" className='mx-5' onChange={handlefashionChange} value={fashiondetails.pattern} style={{ position: 'relative', right: "38px" }} required />
+                                        {(clotheCategory !== 'None' && clotheCategory !== 'Winter Wear') && <div className="d-flex justify-content-between">
+                                            {<div className='my-3' style={{ width: "15rem", position: 'relative', left: '9px' }}>
+                                                <h6 style={{ fontSize: '13px' }}>{BottomsType}:</h6>
+                                                <input type="text" name="bottomtype" id="bottomtype" onChange={handlefashionChange} value={fashiondetails.bottomtype} required />
+                                            </div>}
+                                            <div className='my-3' style={{ width: "15rem", position: 'relative', left: '50px' }}>
+                                                <h6 style={{ fontSize: '13px' }}>{FitType}:</h6>
+                                                <input type="text" name="fit" id="fit" onChange={handlefashionChange} value={fashiondetails.fit} required />
                                             </div>
-                                            <div className='my-3' style={{ width: "15rem", position: 'relative' }}>
-                                                <h6 style={{ fontSize: '13px', position: 'relative', left: '3rem' }}>Brand:</h6>
-                                                <input type="text" name="brand" id="brand" className='mx-5' onChange={handlefashionChange} value={fashiondetails.brand} style={{ position: 'relative', left: '1px' }} required />
-                                            </div>
-                                        </div>
+                                        </div>}
                                     </Typography>
                                 }
                                 {(activeStep === 1 && fashion === 'Watches') &&
@@ -683,15 +780,49 @@ function Editfashion(props) {
                                 }
                                 {activeStep === 2 &&
                                     <Typography sx={{ mt: 2, mb: 1 }}>
-                                        <div className="d-flex">
+                                        <div className="d-flex justify-content-between">
                                             <div className='my-3' style={{ width: "15rem", position: 'relative', right: '43px' }}>
                                                 <h6 style={{ fontSize: '13px', position: 'relative', left: '51px' }}>Price:</h6>
                                                 <input type="number" name="price" id="price" className='mx-5' onChange={handlefashionChange} value={fashiondetails.price} style={{ position: 'relative', left: '4px' }} required />
                                             </div>
-                                            <div className='my-3'>
-                                                <h6 style={{ fontSize: '13px', position: 'relative', left: '51px' }}>Details:</h6>
-                                                <textarea name="information" id="information" cols="30" rows="5" onChange={handlefashionChange} value={fashiondetails.information} style={{ position: 'relative', left: '50px' }} required></textarea>
+                                            <div className='my-3' style={{ width: "15rem", position: 'relative', right: '8px' }}>
+                                                <h6 style={{ fontSize: '13px' }}>Details:</h6>
+                                                <textarea name="information" id="information" cols="30" rows="2" onChange={handlefashionChange} value={fashiondetails.information} required></textarea>
                                             </div>
+                                        </div>
+                                        <div className="d-flex justify-content-between">
+                                            <div className='my-3 ' style={{ width: "15rem", position: 'relative', left: '9px' }}>
+                                                <h6 style={{ fontSize: '13px' }}>Type:</h6>
+                                                <input type="text" name="type" id="type" value={fashiondetails.type} required placeholder='Only for owner' onChange={handlefashionChange} />
+                                            </div>
+                                            {clotheCategory !== "Saree" && <div className='my-3' style={{ width: "15rem", position: 'relative', right: '8px' }}>
+                                                <h6 style={{ fontSize: '13px' }}>{Sleevetype}:</h6>
+                                                <input type="text" name="sleeve" id="sleeve" onChange={handlefashionChange} value={fashiondetails.sleeve} required />
+                                            </div>}
+                                            {clotheCategory === "Saree" && <div className='my-3' style={{ width: "15rem", position: 'relative', right: '8px' }}>
+                                                <h6 style={{ fontSize: '13px' }}>Saree length:</h6>
+                                                <input type="number" name="sarilength" id="sarilength" onChange={handlefashionChange} value={fashiondetails.sarilength} required />
+                                            </div>}
+                                        </div>
+                                        <div className="d-flex">
+                                            <div className='my-3' style={{ width: "15rem", position: 'relative', left: '9px' }}>
+                                                <h6 style={{ fontSize: '13px' }}>Rating:</h6>
+                                                <input type="number" name="rating" id="rating" onChange={handlefashionChange} value={fashiondetails.rating} required />
+                                            </div>
+                                            <div className='my-3' style={{ width: "15rem", position: 'relative', left: '126px' }}>
+                                                <h6 style={{ fontSize: '13px' }}>{Necktype}:</h6>
+                                                <input type="text" name="neck" id="neck" onChange={handlefashionChange} value={fashiondetails.neck} required />
+                                            </div>
+                                        </div>
+                                        <div className="d-flex justify-content-between">
+                                            <div className='my-3' style={{ width: "15rem", position: 'relative', left: '9px' }}>
+                                                <h6 style={{ fontSize: '13px' }}>Wieght:</h6>
+                                                <input type="number" name="weight" id="weight" onChange={handlefashionChange} value={fashiondetails.weight} required />
+                                            </div>
+                                            {clotheCategory !== 'Dresses' && <div className='my-3' style={{ width: "15rem", position: 'relative', right: "8px" }}>
+                                                <h6 style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>In the Box:</h6>
+                                                <textarea name="inthebox" id="inthebox" cols="30" rows="1" value={fashiondetails.inthebox} onChange={handlefashionChange} required></textarea>
+                                            </div>}
                                         </div>
                                     </Typography>
                                 }

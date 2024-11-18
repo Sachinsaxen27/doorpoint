@@ -27,7 +27,7 @@ function Login() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body:JSON.stringify({name:credintial.name,mobile:credintial.mobile,code:code,email:credintial.email,password:credintial.password})
+            body:JSON.stringify({name:credintial.name,mobile:credintial.mobile,code:code,email:credintial.email,password:credintial.password,})
         });
         const json = await response.json()
         if (json.success) {
@@ -44,7 +44,6 @@ const handleChange = (e) => {
     } else if (name !== 'number') {
         setMycredintial({ ...credintial, [name]: value });
     }
-    // setMycredintial({ ...credintial, [e.target.name]: e.target.value })
 
 }
 

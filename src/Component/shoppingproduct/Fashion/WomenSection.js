@@ -15,6 +15,7 @@ function WomenSection() {
     const [womenfashion, setMywomenfashion] = useState([])
     const [option, setMyoption] = useState(localStorage.getItem('filtersoption') || "Saree")
     const location = useLocation()
+
     const getwomenlist = async () => {
         const response = await fetch(`http://localhost:5000/api/fashionadd/getfilterclotheswomen?gender=Women&clothing=${option}`, {
             method: 'GET',
@@ -44,7 +45,7 @@ function WomenSection() {
     return (
         <>
             <div className="container women_nav">
-                <div onClick={() => handleclick("Winter")}>
+                <div onClick={() => handleclick("Winter Wear")}>
                     <div>
                         <img src={icon1} alt="" className='nav_image' />
                     </div>
@@ -84,8 +85,8 @@ function WomenSection() {
             {loadingtime&&<Box sx={{ display: 'flex' }} className='loadingbar'>
                 <CircularProgress />
             </Box>}
-            {!loadingtime&&<div className="container">
-                <div className="row" style={{ margin: '0 auto' }}>
+            {!loadingtime&&<div >
+                <div className="row" style={{ margin: '0px auto' }}>
                     {womenfashion.length > 0 ? womenfashion.map((element, index) => {
                         return <div key={index}><Womenitem element={element} /></div>
                     }) : <Notfound />}

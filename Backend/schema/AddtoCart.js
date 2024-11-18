@@ -21,6 +21,9 @@ const addcart=new Schema({
     },
     quantity:{
         type:Number
+    },
+    brand:{
+        type:String
     }
 })
 module.exports=mongoose.model('addcart',addcart)

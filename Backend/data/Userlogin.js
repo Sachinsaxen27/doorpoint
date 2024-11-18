@@ -3,7 +3,7 @@ const User = require('../schema/Userschema')
 const router = express.Router()
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-const fetchuser=require('../middleware/fetchuser')
+const fetchuser = require('../middleware/fetchuser')
 const { body, validationResult } = require('express-validator')
 
 // ROUTE 1 FOR USER CREATION
@@ -23,7 +23,7 @@ router.post('/usersignup', [
             if (user) {
                 return res.status(400).json({ success, errors: errors.array() });
             }
-    
+
             const salt = await bcrypt.genSalt(10)
             const secpass = await bcrypt.hash(req.body.password, salt)
             user = await User.create({
@@ -32,7 +32,6 @@ router.post('/usersignup', [
                 email: req.body.email,
                 code: req.body.code,
                 password: secpass,
-                // address: req.body.address
             })
             const data = {
                 user: {
@@ -86,22 +85,63 @@ router.post("/ulogin", [
     }
 })
 // ROUTER 3 GET USER DATA
-router.get('/getuserdata',fetchuser, async (req, res) => {
+router.get('/getuserdata', fetchuser, async (req, res) => {
     try {
         const userId = req.user;
-        console.log(req.user,'ds')
-        const user = await User.findById(userId).select('-password -_id -__v')
-        console.log(user)
+        console.log(req.user, 'ds')
+        const user = await User.findById(userId).select('-password -__v')
+        // console.log(user)
         res.json(user)
     } catch (error) {
         res.status(500).send("Some Error Occurred")
     }
 })
-
 // ROUTE 4 SHOW USERLIST
 router.get('/showuser', async (req, res) => {
     const result = await User.find({}, { name: 1, mobile: 1, email: 1, address: 1 }).select('-_id')
     res.json(result)
 
+})
+router.put('/updateuseraddress/:id', async (req, res) => {
+    console.log('enter')
+    try {
+        const addressvalue = {
+            name: req.body.name,
+            mobileno: req.body.mobileno,
+            house_number: req.body.house_number,
+            city: req.body.city,
+            state: req.body.state,
+            landmark: req.body.landmark,
+            postal_code: req.body.pincode,
+            addresstype: req.body.addresstype,
+            area: req.body.area,
+            secondmobile: req.body.secondmobile
+        }
+        let user = await User.findById(req.params.id)
+        user.address.push(addressvalue);
+        await user.save();
+        user = await User.findById(req.params.id).select('-password -__v')
+        console.log(user)
+        res.json({ user,success: true });
+    } catch (error) {
+        console.log('success',error)
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+})
+router.put('/updatepan/:id',async(req,res)=>{
+    try{
+        const{panNumber,panimage}=req.body
+        const newpan={}
+        if(panNumber){newpan.panNumber=panNumber}
+        if(panimage){newpan.panimage=panimage}
+        console.log('enter')
+        let success=false
+        let user=await User.findByIdAndUpdate(req.params.id,{$set:newpan},{new:true})
+        success=true
+        console.log(user)
+        res.status(200).json(success)
+    }catch(error){
+        res.status(400).json(error)
+    }
 })
 module.exports = router

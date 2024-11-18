@@ -34,7 +34,7 @@ router.post('/clothes', async (req, res) => {
             clotheCategory: req.body.clotheCategory,
             pattern: req.body.pattern,
             rating: ratings,
-            fieldsection: req.body.fieldsection,
+            type: req.body.type,
             sarilength: req.body.sarilength,
             weight: req.body.weight,
             neck: req.body.neck,
@@ -77,7 +77,7 @@ router.post('/footwear', async (req, res) => {
             information: req.body.information,
             footweartype: req.body.footwear,
             rating: ratings,
-            fieldsection: req.body.fieldsection
+            type: req.body.type
         });
         footwear.save()
         success = true;
@@ -117,7 +117,7 @@ router.post('/grooming', async (req, res) => {
             skintype: req.body.skintype,
             appiledfor: req.body.appiledfor,
             rating: ratings,
-            fieldsection: req.body.fieldsection
+            type: req.body.type
         });
         grooming.save()
         success = true;
@@ -153,7 +153,7 @@ router.post('/watch', async (req, res) => {
             information: req.body.information,
             watchconsole: req.body.watchconsole,
             rating: ratings,
-            fieldsection: req.body.fieldsection
+            type: req.body.type
         });
         // grooming.save()
         success = true;
@@ -195,7 +195,7 @@ router.post('/accessories', async (req, res) => {
             gemstone: req.body.gemstone,
             bagtype: req.body.bagtype,
             rating: ratings,
-            fieldsection: req.body.fieldsection
+            type: req.body.type
         });
         // grooming.save()
         success = true;
@@ -208,11 +208,11 @@ router.post('/accessories', async (req, res) => {
 });
 //ROUTER 6 FOR ALL LIST ITEMS
 router.get('/allitemlist', async (req, res) => {
-    const fashionlist = await FashionSchema.find({}, { name: 1, itemtype: 1, brand: 1, color: 1, size: 1, material: 1, price: 1, image: 1, gender: 1, clothestype: 1, information: 1, forwho: 1, clotheCategory: 1, pattern: 1, rating: 1, fieldsection: 1, sarilength: 1, weight: 1, neck: 1, sleeve: 1, bottomtype: 1, inthebox: 1, fit: 1 })
-    const footwearlist = await footwearScehma.find({}, { name: 1, itemtype: 1, brand: 1, color: 1, size: 1, material: 1, price: 1, image: 1, gender: 1, information: 1, rating: 1, fieldsection: 1, sarilength: 1, weight: 1 })
-    const groominglist = await GroomingSchema.find({}, { name: 1, itemtype: 1, brand: 1, lifeshell: 1, groomingtype: 1, quantity: 1, price: 1, image: 1, gender: 1, rating: 1, fieldsection: 1, sarilength: 1, weight: 1 })
-    const watchlist = await WatchesSchema.find({}, { name: 1, itemtype: 1, brand: 1, color: 1, watchshape: 1, watchstrap: 1, price: 1, image: 1, gender: 1, information: 1, watchconsole: 1, rating: 1, fieldsection: 1, sarilength: 1, weight: 1 })
-    const jewellerylist = await AccessoriesSchema.findOne({}, { name: 1, itemtype: 1, brand: 1, color: 1, price: 1, image: 1, gender: 1, information: 1, material: 1, producttype: 1, productarea: 1, jewelltype: 1, gemstone: 1, bagtype: 1, rating: 1, fieldsection: 1, sarilength: 1, weight: 1 })
+    const fashionlist = await FashionSchema.find({}, { name: 1, itemtype: 1, brand: 1, color: 1, size: 1, material: 1, price: 1, image: 1, gender: 1, clothestype: 1, information: 1, forwho: 1, clotheCategory: 1, pattern: 1, rating: 1, type: 1, sarilength: 1, weight: 1, neck: 1, sleeve: 1, bottomtype: 1, inthebox: 1, fit: 1 })
+    const footwearlist = await footwearScehma.find({}, { name: 1, itemtype: 1, brand: 1, color: 1, size: 1, material: 1, price: 1, image: 1, gender: 1, information: 1, rating: 1, type: 1, sarilength: 1, weight: 1 })
+    const groominglist = await GroomingSchema.find({}, { name: 1, itemtype: 1, brand: 1, lifeshell: 1, groomingtype: 1, quantity: 1, price: 1, image: 1, gender: 1, rating: 1, type: 1, sarilength: 1, weight: 1 })
+    const watchlist = await WatchesSchema.find({}, { name: 1, itemtype: 1, brand: 1, color: 1, watchshape: 1, watchstrap: 1, price: 1, image: 1, gender: 1, information: 1, watchconsole: 1, rating: 1, type: 1, sarilength: 1, weight: 1 })
+    const jewellerylist = await AccessoriesSchema.findOne({}, { name: 1, itemtype: 1, brand: 1, color: 1, price: 1, image: 1, gender: 1, information: 1, material: 1, producttype: 1, productarea: 1, jewelltype: 1, gemstone: 1, bagtype: 1, rating: 1, type: 1, sarilength: 1, weight: 1 })
     let newarr = fashionlist.concat(footwearlist, groominglist, watchlist, jewellerylist)
     res.status(200).json({ newarr })
 })
@@ -220,60 +220,71 @@ router.get('/allitemlist', async (req, res) => {
 router.get('/getfilterclotheswomen', async (req, res) => {
     const gender = req.query.gender
     const clothing = req.query.clothing
-    console.log(gender, clothing)
-    const fashionlist = await FashionSchema.find({ forwho: gender, clotheCategory: clothing }, { itemid: 1, name: 1, itemtype: 1, brand: 1, color: 1, size: 1, material: 1, price: 1, image: 1, gender: 1, information: 1, clothestype: 1, forwho: 1, clotheCategory: 1, pattern: 1, rating: 1, fieldsection: 1, sarilength: 1, weight: 1, neck: 1, sleeve: 1, bottomtype: 1, inthebox: 1, fit: 1 })
-    console.log("Exit")
-    res.status(200).json(fashionlist)
+    // console.log(gender, clothing)
+    const newlist = await FashionSchema.aggregate([
+        {
+            $match: {
+                clotheCategory: clothing
+            }
+        }
+    ])
+    // const fashionlist = await FashionSchema.find({ forwho: gender, clotheCategory: clothing }, { itemid: 1, name: 1, itemtype: 1, brand: 1, color: 1, size: 1, material: 1, price: 1, image: 1, gender: 1, information: 1, clothestype: 1, forwho: 1, clotheCategory: 1, pattern: 1, rating: 1, type: 1, sarilength: 1, weight: 1, neck: 1, sleeve: 1, bottomtype: 1, inthebox: 1, fit: 1 })
+    // console.log("Exit")
+    res.status(200).json(newlist)
 })
 // ROUTER 8 GET ALL FOOTWEAR LIST
 router.get('/getfootwear', async (req, res) => {
-    const footwearlist = await footwearScehma.find({}, { itemid: 1, name: 1, brand: 1, color: 1, size: 1, material: 1, price: 1, image: 1, gender: 1, information: 1, footweartype: 1, rating: 1, fieldsection: 1, sarilength: 1, weight: 1 })
+    const footwearlist = await footwearScehma.find({}, { itemid: 1, name: 1, brand: 1, color: 1, size: 1, material: 1, price: 1, image: 1, gender: 1, information: 1, footweartype: 1, rating: 1, type: 1, sarilength: 1, weight: 1 })
     res.status(200).json({ footwearlist })
 })
 // ROUTER 9 GET ALL GROOMING ITEM LIST
 router.get('/getgrooming', async (req, res) => {
-    const groominglist = await GroomingSchema.find({}, { itemid: 1, name: 1, itemtype: 1, brand: 1, groomingtype: 1, image: 1, lifeshell: 1, quantity: 1, price: 1, gender: 1, information: 1, skintype: 1, appiledfor: 1, ptype: 1, idealfor: 1, rating: 1, fieldsection: 1, sarilength: 1, weight: 1 })
+    const groominglist = await GroomingSchema.find({}, { itemid: 1, name: 1, itemtype: 1, brand: 1, groomingtype: 1, image: 1, lifeshell: 1, quantity: 1, price: 1, gender: 1, information: 1, skintype: 1, appiledfor: 1, ptype: 1, idealfor: 1, rating: 1, type: 1, sarilength: 1, weight: 1 })
     res.status(200).json({ groominglist })
+})
+router.get('/getgroomings', async (req, res) => {
+    const groominglist = await GroomingSchema.find({}, { itemid: 1, name: 1, itemtype: 1, brand: 1, groomingtype: 1, image: 1, lifeshell: 1, quantity: 1, price: 1, gender: 1, information: 1, skintype: 1, appiledfor: 1, ptype: 1, idealfor: 1, rating: 1, type: 1, sarilength: 1, weight: 1 })
+    res.status(200).json(groominglist.length)
 })
 // ROUTER 10 GET ALL WATCHES LIST
 router.get('/getwatches', async (req, res) => {
-    const wathceslist = await WatchesSchema.find({}, { itemid: 1, name: 1, itemtype: 1, brand: 1, color: 1, watchshape: 1, watchstrap: 1, image: 1, price: 1, gender: 1, information: 1, watchconsole: 1, rating: 1, fieldsection: 1, sarilength: 1, weight: 1 })
+    const wathceslist = await WatchesSchema.find({}, { itemid: 1, name: 1, itemtype: 1, brand: 1, color: 1, watchshape: 1, watchstrap: 1, image: 1, price: 1, gender: 1, information: 1, watchconsole: 1, rating: 1, type: 1, sarilength: 1, weight: 1 })
     res.status(200).json({ wathceslist })
 })
 // ROUTER 11 GET ALL WATCHES LIST
 router.get('/getwomenbag', async (req, res) => {
-    const accessorieslist = await AccessoriesSchema.find({ gender: 'female' }, { itemid: 1, name: 1, itemtype: 1, brand: 1, color: 1, price: 1, image: 1, gender: 1, information: 1, material: 1, S: 1, productarea: 1, productpocket: 1, productcardslot: 1, plating: 1, gemstone: 1, bagtype: 1, producttype: 1, rating: 1, fieldsection: 1, sarilength: 1, weight: 1 })
+    const accessorieslist = await AccessoriesSchema.find({ gender: 'female' }, { itemid: 1, name: 1, itemtype: 1, brand: 1, color: 1, price: 1, image: 1, gender: 1, information: 1, material: 1, S: 1, productarea: 1, productpocket: 1, productcardslot: 1, plating: 1, gemstone: 1, bagtype: 1, producttype: 1, rating: 1, type: 1, sarilength: 1, weight: 1 })
     res.status(200).json({ accessorieslist })
 })
 // ROUTER 12 GET ALL CLOTHES LIST
 router.get('/onlyclothes', async (req, res) => {
-    const fashionlist = await FashionSchema.find({}, { itemid: 1, name: 1, itemtype: 1, brand: 1, color: 1, size: 1, material: 1, price: 1, image: 1, gender: 1, information: 1, clothestype: 1, forwho: 1, clotheCategory: 1, pattern: 1, rating: 1, fieldsection: 1, sarilength: 1, weight: 1, neck: 1, sleeve: 1, bottomtype: 1, inthebox: 1, fit: 1 })
+    const fashionlist = await FashionSchema.find({}, { itemid: 1, name: 1, itemtype: 1, brand: 1, color: 1, size: 1, material: 1, price: 1, image: 1, gender: 1, information: 1, clothestype: 1, forwho: 1, clotheCategory: 1, pattern: 1, rating: 1, type: 1, sarilength: 1, weight: 1, neck: 1, sleeve: 1, bottomtype: 1, inthebox: 1, fit: 1 })
     res.status(200).json(fashionlist)
 })
 // ROUTER 13 FOR UPDATE CLOTHES
 router.put('/editClothes/:id', async (req, res) => {
-    const { name, itemid, itemtype, image, brand, color, size, material, price, gender, information, clothestype, forwho, clotheCategory, pattern, rating, neck, sleeve, bottomtype, inthebox } = req.body
+    const { name, itemid, itemtype, image, brand, color, size, material, price, gender, information, clothestype, forwho, clotheCategory, pattern, rating, neck, sleeve, bottomtype, inthebox} = req.body
     const newfashion = {}
-    if (image) { newfashion.image = image }
+    if (image.length>0) { newfashion.image = image }
     if (rating) { newfashion.rating = rating }
-    newfashion.name = name,
-        newfashion.itemid = itemid,
-        newfashion.itemtype = itemtype,
-        newfashion.brand = brand,
-        newfashion.color = color,
-        newfashion.size = size,
-        newfashion.material = material,
-        newfashion.price = price,
-        newfashion.gender = gender,
-        newfashion.information = information,
-        newfashion.clothestype = clothestype,
-        newfashion.forwho = forwho,
-        newfashion.clotheCategory = clotheCategory,
-        newfashion.pattern = pattern,
-        newfashion.neck = neck
-    newfashion.sleeve = sleeve
-    newfashion.bottomtype = bottomtype
-    newfashion.inthebox = inthebox
+    if (name) { newfashion.name = name }
+    if (itemid) { newfashion.itemid = itemid }
+    if (itemtype) {newfashion.itemtype = itemtype}
+    if (brand) {newfashion.brand = brand}
+    if (color) {newfashion.color = color}
+    if (size) {newfashion.size = size}
+    if (material) {newfashion.material = material}
+    if (price) {newfashion.price = price}
+    if (gender) {newfashion.gender = gender}
+    if (information) {newfashion.information = information}
+    if (clothestype) {newfashion.clothestype= clothestype}
+    if (forwho) {newfashion.forwho = forwho}
+    if (clotheCategory){newfashion.clotheCategory = clotheCategory}
+    if (pattern){newfashion.pattern = pattern}
+    if (neck){newfashion.neck = neck}
+    if (sleeve){newfashion.sleeve = sleeve}
+    if (bottomtype){newfashion.bottomtype = bottomtype}
+    if (inthebox){newfashion.inthebox = inthebox}
     let success = true
     let fashion = await FashionSchema.findById(req.params.id)
 
